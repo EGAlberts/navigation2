@@ -19,8 +19,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/wait_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/wait_cancel_node.hpp"
 #include "lifecycle_msgs/srv/change_state.hpp"
 
 class CancelWaitServer : public TestActionServer<nav2_msgs::action::Wait>
@@ -73,11 +73,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::WaitCancel>(
+        return std::make_unique<nav2_behavior_tree_humble_main::WaitCancel>(
           name, "wait", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::WaitCancel>("CancelWait", builder);
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::WaitCancel>("CancelWait", builder);
   }
 
   static void TearDownTestCase()

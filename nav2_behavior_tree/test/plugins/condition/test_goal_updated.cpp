@@ -18,19 +18,19 @@
 #include <set>
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/goal_updated_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/goal_updated_condition.hpp"
 
-class GoalUpdatedConditionTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class GoalUpdatedConditionTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
   {
     config_->input_ports["goals"] = "";
     config_->input_ports["goal"] = "";
-    bt_node_ = std::make_shared<nav2_behavior_tree::GoalUpdatedCondition>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::GoalUpdatedCondition>(
       "goal_updated", *config_);
   }
 
@@ -40,10 +40,10 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::GoalUpdatedCondition> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::GoalUpdatedCondition> bt_node_;
 };
 
-std::shared_ptr<nav2_behavior_tree::GoalUpdatedCondition>
+std::shared_ptr<nav2_behavior_tree_humble_main::GoalUpdatedCondition>
 GoalUpdatedConditionTestFixture::bt_node_ = nullptr;
 
 TEST_F(GoalUpdatedConditionTestFixture, test_behavior)

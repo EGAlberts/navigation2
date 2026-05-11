@@ -25,8 +25,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/navigate_through_poses_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/navigate_through_poses_action.hpp"
 
 class NavigateThroughPosesActionServer
   : public TestActionServer<nav2_msgs::action::NavigateThroughPoses>
@@ -81,11 +81,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::NavigateThroughPosesAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::NavigateThroughPosesAction>(
           name, "navigate_through_poses", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::NavigateThroughPosesAction>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::NavigateThroughPosesAction>(
       "NavigateThroughPoses", builder);
   }
 

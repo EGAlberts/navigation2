@@ -18,18 +18,18 @@
 
 #include "utils/test_behavior_tree_fixture.hpp"
 #include "utils/test_dummy_tree_node.hpp"
-#include "nav2_behavior_tree/plugins/control/pipeline_sequence.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/control/pipeline_sequence.hpp"
 
-class PipelineSequenceTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class PipelineSequenceTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp() override
   {
-    bt_node_ = std::make_shared<nav2_behavior_tree::PipelineSequence>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::PipelineSequence>(
       "pipeline_sequence", *config_);
-    first_child_ = std::make_shared<nav2_behavior_tree::DummyNode>();
-    second_child_ = std::make_shared<nav2_behavior_tree::DummyNode>();
-    third_child_ = std::make_shared<nav2_behavior_tree::DummyNode>();
+    first_child_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
+    second_child_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
+    third_child_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
     bt_node_->addChild(first_child_.get());
     bt_node_->addChild(second_child_.get());
     bt_node_->addChild(third_child_.get());
@@ -44,19 +44,19 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::PipelineSequence> bt_node_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> first_child_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> second_child_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> third_child_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::PipelineSequence> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> first_child_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> second_child_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> third_child_;
 };
 
-std::shared_ptr<nav2_behavior_tree::PipelineSequence>
+std::shared_ptr<nav2_behavior_tree_humble_main::PipelineSequence>
 PipelineSequenceTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 PipelineSequenceTestFixture::first_child_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 PipelineSequenceTestFixture::second_child_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 PipelineSequenceTestFixture::third_child_ = nullptr;
 
 TEST_F(PipelineSequenceTestFixture, test_failure_on_idle_child)

@@ -19,20 +19,20 @@
 #include <set>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/decorator/rate_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/rate_controller.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-class RateControllerTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class RateControllerTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
   {
     config_->input_ports["hz"] = 10.0;
-    bt_node_ = std::make_shared<nav2_behavior_tree::RateController>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::RateController>(
       "rate_controller", *config_);
-    dummy_node_ = std::make_shared<nav2_behavior_tree::DummyNode>();
+    dummy_node_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
     bt_node_->setChild(dummy_node_.get());
   }
 
@@ -43,13 +43,13 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::RateController> bt_node_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> dummy_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::RateController> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> dummy_node_;
 };
 
-std::shared_ptr<nav2_behavior_tree::RateController>
+std::shared_ptr<nav2_behavior_tree_humble_main::RateController>
 RateControllerTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 RateControllerTestFixture::dummy_node_ = nullptr;
 
 TEST_F(RateControllerTestFixture, test_behavior)

@@ -15,7 +15,7 @@
 #include <memory>
 #include <string>
 
-#include "nav2_util/twist_subscriber.hpp"
+#include "hm_nav2_util/twist_subscriber.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
 
@@ -26,19 +26,19 @@
 TEST(TwistSubscriber, Unstamped)
 {
   rclcpp::init(0, nullptr);
-  auto sub_node = std::make_shared<nav2_util::LifecycleNode>("sub_node", "");
+  auto sub_node = std::make_shared<hm_nav2_util::LifecycleNode>("sub_node", "");
   sub_node->configure();
   sub_node->activate();
   sub_node->declare_parameter("enable_stamped_cmd_vel", rclcpp::ParameterValue(false));
 
   geometry_msgs::msg::TwistStamped sub_msg {};
-  auto vel_subscriber = std::make_unique<nav2_util::TwistSubscriber>(
+  auto vel_subscriber = std::make_unique<hm_nav2_util::TwistSubscriber>(
     sub_node, "cmd_vel", 1,
     [&](const geometry_msgs::msg::Twist msg) {sub_msg.twist = msg;},
     [&](const geometry_msgs::msg::TwistStamped msg) {sub_msg = msg;}
   );
 
-  auto pub_node = std::make_shared<nav2_util::LifecycleNode>("pub_node", "");
+  auto pub_node = std::make_shared<hm_nav2_util::LifecycleNode>("pub_node", "");
   pub_node->configure();
 
   geometry_msgs::msg::TwistStamped pub_msg {};
@@ -63,19 +63,19 @@ TEST(TwistSubscriber, Unstamped)
 TEST(TwistSubscriber, Stamped)
 {
   rclcpp::init(0, nullptr);
-  auto sub_node = std::make_shared<nav2_util::LifecycleNode>("sub_node", "");
+  auto sub_node = std::make_shared<hm_nav2_util::LifecycleNode>("sub_node", "");
   sub_node->declare_parameter("enable_stamped_cmd_vel", true);
   sub_node->configure();
   sub_node->activate();
 
   geometry_msgs::msg::TwistStamped sub_msg {};
-  auto vel_subscriber = std::make_unique<nav2_util::TwistSubscriber>(
+  auto vel_subscriber = std::make_unique<hm_nav2_util::TwistSubscriber>(
     sub_node, "cmd_vel", 1,
     [&](const geometry_msgs::msg::Twist msg) {sub_msg.twist = msg;},
     [&](const geometry_msgs::msg::TwistStamped msg) {sub_msg = msg;}
   );
 
-  auto pub_node = std::make_shared<nav2_util::LifecycleNode>("pub_node", "");
+  auto pub_node = std::make_shared<hm_nav2_util::LifecycleNode>("pub_node", "");
   pub_node->configure();
 
   geometry_msgs::msg::TwistStamped pub_msg {};

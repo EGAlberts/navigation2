@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(nav2_util)
+project(hm_nav2_util)
 
 find_package(ament_cmake REQUIRED)
 find_package(bond REQUIRED)
@@ -8,6 +8,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(lifecycle_msgs REQUIRED)
 find_package(nav2_common REQUIRED)
 find_package(nav2_msgs REQUIRED)
+find_package(hm_nav2_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(rcl_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -44,6 +45,7 @@ ament_export_dependencies(
   geometry_msgs
   lifecycle_msgs
   nav2_msgs
+  hm_nav2_msgs
   nav_msgs
   rcl_interfaces
   rclcpp

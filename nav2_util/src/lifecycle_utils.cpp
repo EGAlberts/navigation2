@@ -19,9 +19,9 @@
 
 #include "lifecycle_msgs/msg/transition.hpp"
 
-#include "nav2_util/lifecycle_service_client.hpp"
+#include "hm_nav2_util/lifecycle_service_client.hpp"
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 #define RETRY(fn, retries) \
@@ -95,4 +95,4 @@ void reset_lifecycle_nodes(
   }
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

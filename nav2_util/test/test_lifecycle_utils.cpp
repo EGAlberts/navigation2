@@ -16,12 +16,12 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "nav2_util/lifecycle_utils.hpp"
+#include "hm_nav2_util/lifecycle_utils.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-using nav2_util::startup_lifecycle_nodes;
-using nav2_util::reset_lifecycle_nodes;
+using hm_nav2_util::startup_lifecycle_nodes;
+using hm_nav2_util::reset_lifecycle_nodes;
 
 void SpinNodesUntilDone(
   std::vector<rclcpp_lifecycle::LifecycleNode::SharedPtr> nodes,

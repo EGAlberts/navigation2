@@ -17,9 +17,9 @@
 
 #include "behaviortree_cpp/condition_node.h"
 
-#include "nav2_behavior_tree/plugins/condition/path_expiring_timer_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/path_expiring_timer_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 PathExpiringTimerCondition::PathExpiringTimerCondition(
@@ -66,10 +66,10 @@ BT::NodeStatus PathExpiringTimerCondition::tick()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::PathExpiringTimerCondition>("PathExpiringTimer");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::PathExpiringTimerCondition>("PathExpiringTimer");
 }

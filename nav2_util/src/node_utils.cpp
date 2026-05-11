@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_util/node_utils.hpp"
+#include "hm_nav2_util/node_utils.hpp"
 #include <chrono>
 #include <string>
 #include <algorithm>
@@ -25,7 +25,7 @@ using std::string;
 using std::replace_if;
 using std::isalnum;
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 string sanitize_node_name(const string & potential_node_name)
@@ -103,4 +103,4 @@ void setSoftRealTimePriority()
   }
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

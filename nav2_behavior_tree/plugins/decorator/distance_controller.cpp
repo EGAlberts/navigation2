@@ -18,16 +18,16 @@
 #include <memory>
 #include <cmath>
 
-#include "nav2_util/robot_utils.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "tf2_ros/buffer.h"
 
 #include "behaviortree_cpp/decorator_node.h"
 
-#include "nav2_behavior_tree/plugins/decorator/distance_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/distance_controller.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 DistanceController::DistanceController(
@@ -53,7 +53,7 @@ inline BT::NodeStatus DistanceController::tick()
   if (!BT::isStatusActive(status())) {
     // Reset the starting position since we're starting a new iteration of
     // the distance controller (moving from IDLE to RUNNING)
-    if (!nav2_util::getCurrentPose(
+    if (!hm_nav2_util::getCurrentPose(
         start_pose_, *tf_, global_frame_, robot_base_frame_,
         transform_tolerance_))
     {
@@ -67,7 +67,7 @@ inline BT::NodeStatus DistanceController::tick()
 
   // Determine distance travelled since we've started this iteration
   geometry_msgs::msg::PoseStamped current_pose;
-  if (!nav2_util::getCurrentPose(
+  if (!hm_nav2_util::getCurrentPose(
       current_pose, *tf_, global_frame_, robot_base_frame_,
       transform_tolerance_))
   {
@@ -76,7 +76,7 @@ inline BT::NodeStatus DistanceController::tick()
   }
 
   // Get euclidean distance
-  auto travelled = nav2_util::geometry_utils::euclidean_distance(
+  auto travelled = hm_nav2_util::geometry_utils::euclidean_distance(
     start_pose_.pose, current_pose.pose);
 
   // The child gets ticked the first time through and every time the threshold
@@ -94,7 +94,7 @@ inline BT::NodeStatus DistanceController::tick()
         return child_state;
 
       case BT::NodeStatus::SUCCESS:
-        if (!nav2_util::getCurrentPose(
+        if (!hm_nav2_util::getCurrentPose(
             start_pose_, *tf_, global_frame_, robot_base_frame_,
             transform_tolerance_))
         {
@@ -112,10 +112,10 @@ inline BT::NodeStatus DistanceController::tick()
   return status();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::DistanceController>("DistanceController");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::DistanceController>("DistanceController");
 }

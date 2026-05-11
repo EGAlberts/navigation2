@@ -15,9 +15,9 @@
 #include <memory>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/action/compute_and_track_route_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/compute_and_track_route_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 ComputeAndTrackRouteAction::ComputeAndTrackRouteAction(
@@ -131,7 +131,7 @@ void ComputeAndTrackRouteAction::on_wait_for_result(
   }
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -139,10 +139,10 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::ComputeAndTrackRouteAction>(
+      return std::make_unique<nav2_behavior_tree_humble_main::ComputeAndTrackRouteAction>(
         name, "compute_and_track_route", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::ComputeAndTrackRouteAction>(
+  factory.registerBuilder<nav2_behavior_tree_humble_main::ComputeAndTrackRouteAction>(
     "ComputeAndTrackRoute", builder);
 }

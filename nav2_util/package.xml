@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>nav2_util</name>
+  <name>hm_nav2_util</name>
   <version>1.4.0</version>
   <description>Nav2 utilities</description>
   <maintainer email="michael.jeronimo@intel.com">Michael Jeronimo</maintainer>
@@ -19,6 +19,7 @@
   <depend>geometry_msgs</depend>
   <depend>lifecycle_msgs</depend>
   <depend>nav2_msgs</depend>
+  <depend>hm_nav2_msgs</depend>
   <depend>nav_msgs</depend>
   <depend>rcl_interfaces</depend>
   <depend>rclcpp</depend>

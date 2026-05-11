@@ -24,8 +24,8 @@
 #include "rclcpp_action/rclcpp_action.hpp"
 
 #include "behaviortree_cpp/bt_factory.h"
-#include "nav2_behavior_tree/bt_action_node.hpp"
-#include "nav2_behavior_tree/utils/loop_rate.hpp"
+#include "nav2_behavior_tree_humble_main/bt_action_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/loop_rate.hpp"
 
 #include "test_msgs/action/fibonacci.hpp"
 
@@ -125,13 +125,13 @@ protected:
   std::chrono::nanoseconds server_loop_rate_;
 };
 
-class FibonacciAction : public nav2_behavior_tree::BtActionNode<test_msgs::action::Fibonacci>
+class FibonacciAction : public nav2_behavior_tree_humble_main::BtActionNode<test_msgs::action::Fibonacci>
 {
 public:
   FibonacciAction(
     const std::string & xml_tag_name,
     const BT::NodeConfiguration & conf)
-  : nav2_behavior_tree::BtActionNode<test_msgs::action::Fibonacci>(xml_tag_name, "fibonacci", conf)
+  : nav2_behavior_tree_humble_main::BtActionNode<test_msgs::action::Fibonacci>(xml_tag_name, "fibonacci", conf)
   {}
 
   void on_tick() override
@@ -261,7 +261,7 @@ TEST_F(BTActionNodeTestFixture, test_server_timeout_success)
   BT::NodeStatus result = BT::NodeStatus::RUNNING;
 
   // BT loop execution rate
-  nav2_behavior_tree::LoopRate loopRate(10ms, tree_.get());
+  nav2_behavior_tree_humble_main::LoopRate loopRate(10ms, tree_.get());
 
   // main BT execution loop
   while (rclcpp::ok() && result == BT::NodeStatus::RUNNING) {

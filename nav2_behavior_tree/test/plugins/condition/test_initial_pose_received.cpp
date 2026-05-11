@@ -19,15 +19,15 @@
 #include <string>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/initial_pose_received_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/initial_pose_received_condition.hpp"
 
-class InitialPoseReceivedConditionTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class InitialPoseReceivedConditionTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
   {
     config_->input_ports["initial_pose_received"] = false;
-    bt_node_ = std::make_shared<nav2_behavior_tree::InitialPoseReceived>("TestNode", *config_);
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::InitialPoseReceived>("TestNode", *config_);
   }
 
   void TearDown()

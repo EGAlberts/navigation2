@@ -15,13 +15,13 @@
 #include <string>
 #include <memory>
 
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/node_utils.hpp"
+#include "hm_nav2_util/node_utils.hpp"
 
-#include "nav2_behavior_tree/plugins/condition/are_poses_near_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/are_poses_near_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 ArePosesNearCondition::ArePosesNearCondition(
@@ -62,9 +62,9 @@ bool ArePosesNearCondition::arePosesNearby()
   getInput("tolerance", tol);
 
   if (pose1.header.frame_id != pose2.header.frame_id) {
-    if (!nav2_util::transformPoseInTargetFrame(
+    if (!hm_nav2_util::transformPoseInTargetFrame(
       pose1, pose1, *tf_, global_frame_, transform_tolerance_) ||
-      !nav2_util::transformPoseInTargetFrame(
+      !hm_nav2_util::transformPoseInTargetFrame(
       pose2, pose2, *tf_, global_frame_, transform_tolerance_))
     {
       RCLCPP_ERROR(node_->get_logger(), "Failed to transform poses to the same frame");
@@ -77,10 +77,10 @@ bool ArePosesNearCondition::arePosesNearby()
   return (dx * dx + dy * dy) <= (tol * tol);
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::ArePosesNearCondition>("ArePosesNear");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::ArePosesNearCondition>("ArePosesNear");
 }

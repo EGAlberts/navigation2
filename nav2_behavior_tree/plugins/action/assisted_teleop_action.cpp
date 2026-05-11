@@ -15,16 +15,16 @@
 #include <string>
 #include <memory>
 
-#include "nav2_behavior_tree/plugins/action/assisted_teleop_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/assisted_teleop_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 AssistedTeleopAction::AssistedTeleopAction(
   const std::string & xml_tag_name,
   const std::string & action_name,
   const BT::NodeConfiguration & conf)
-: BtActionNode<nav2_msgs::action::AssistedTeleop>(xml_tag_name, action_name, conf)
+: BtActionNode<hm_nav2_msgs::action::AssistedTeleop>(xml_tag_name, action_name, conf)
 {}
 
 void AssistedTeleopAction::initialize()
@@ -75,7 +75,7 @@ void AssistedTeleopAction::on_timeout()
   setOutput("error_msg", "Behavior Tree action client timed out waiting.");
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -83,9 +83,9 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::AssistedTeleopAction>(
+      return std::make_unique<nav2_behavior_tree_humble_main::AssistedTeleopAction>(
         name, "assisted_teleop", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::AssistedTeleopAction>("AssistedTeleop", builder);
+  factory.registerBuilder<nav2_behavior_tree_humble_main::AssistedTeleopAction>("AssistedTeleop", builder);
 }

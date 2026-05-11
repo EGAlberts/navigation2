@@ -15,10 +15,10 @@
 #include <chrono>
 #include <thread>
 
-#include "nav2_util/execution_timer.hpp"
+#include "hm_nav2_util/execution_timer.hpp"
 #include "gtest/gtest.h"
 
-using nav2_util::ExecutionTimer;
+using hm_nav2_util::ExecutionTimer;
 using std::this_thread::sleep_for;
 using namespace std::chrono_literals;
 

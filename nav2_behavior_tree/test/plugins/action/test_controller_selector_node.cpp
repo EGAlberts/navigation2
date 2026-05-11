@@ -19,9 +19,9 @@
 #include <set>
 #include <string>
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
 #include "behaviortree_cpp/bt_factory.h"
-#include "nav2_behavior_tree/plugins/action/controller_selector_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/controller_selector_node.hpp"
 #include "nav_msgs/msg/path.hpp"
 #include "std_msgs/msg/string.hpp"
 
@@ -41,10 +41,10 @@ public:
     config_->blackboard->set("node", node_);
 
     BT::NodeBuilder builder = [](const std::string & name, const BT::NodeConfiguration & config) {
-        return std::make_unique<nav2_behavior_tree::ControllerSelector>(name, config);
+        return std::make_unique<nav2_behavior_tree_humble_main::ControllerSelector>(name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::ControllerSelector>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::ControllerSelector>(
       "ControllerSelector",
       builder);
   }

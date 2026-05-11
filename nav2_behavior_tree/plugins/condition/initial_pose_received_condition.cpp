@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_behavior_tree/plugins/condition/initial_pose_received_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/initial_pose_received_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 InitialPoseReceived::InitialPoseReceived(
   const std::string & name,
@@ -30,10 +30,10 @@ BT::NodeStatus InitialPoseReceived::tick()
   return initPoseReceived ? BT::NodeStatus::SUCCESS : BT::NodeStatus::FAILURE;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::InitialPoseReceived>("InitialPoseReceived");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::InitialPoseReceived>("InitialPoseReceived");
 }

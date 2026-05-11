@@ -19,11 +19,11 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/assisted_teleop_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/assisted_teleop_cancel_node.hpp"
 #include "lifecycle_msgs/srv/change_state.hpp"
 
-class CancelAssistedTeleopServer : public TestActionServer<nav2_msgs::action::AssistedTeleop>
+class CancelAssistedTeleopServer : public TestActionServer<hm_nav2_msgs::action::AssistedTeleop>
 {
 public:
   CancelAssistedTeleopServer()
@@ -33,7 +33,7 @@ public:
 protected:
   void execute(
     const typename std::shared_ptr<
-      rclcpp_action::ServerGoalHandle<nav2_msgs::action::AssistedTeleop>>
+      rclcpp_action::ServerGoalHandle<hm_nav2_msgs::action::AssistedTeleop>>
     goal_handle)
   {
     while (!goal_handle->is_canceling()) {
@@ -68,17 +68,17 @@ public:
     config_->blackboard->set<std::chrono::milliseconds>(
       "wait_for_service_timeout",
       std::chrono::milliseconds(1000));
-    client_ = rclcpp_action::create_client<nav2_msgs::action::AssistedTeleop>(
+    client_ = rclcpp_action::create_client<hm_nav2_msgs::action::AssistedTeleop>(
       node_, "assisted_teleop");
 
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::AssistedTeleopCancel>(
+        return std::make_unique<nav2_behavior_tree_humble_main::AssistedTeleopCancel>(
           name, "assisted_teleop", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::AssistedTeleopCancel>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::AssistedTeleopCancel>(
       "CancelAssistedTeleop", builder);
   }
 
@@ -98,7 +98,7 @@ public:
   }
 
   static std::shared_ptr<CancelAssistedTeleopServer> action_server_;
-  static std::shared_ptr<rclcpp_action::Client<nav2_msgs::action::AssistedTeleop>> client_;
+  static std::shared_ptr<rclcpp_action::Client<hm_nav2_msgs::action::AssistedTeleop>> client_;
 
 protected:
   static rclcpp::Node::SharedPtr node_;
@@ -110,7 +110,7 @@ protected:
 rclcpp::Node::SharedPtr CancelAssistedTeleopActionTestFixture::node_ = nullptr;
 std::shared_ptr<CancelAssistedTeleopServer>
 CancelAssistedTeleopActionTestFixture::action_server_ = nullptr;
-std::shared_ptr<rclcpp_action::Client<nav2_msgs::action::AssistedTeleop>>
+std::shared_ptr<rclcpp_action::Client<hm_nav2_msgs::action::AssistedTeleop>>
 CancelAssistedTeleopActionTestFixture::client_ = nullptr;
 
 BT::NodeConfiguration * CancelAssistedTeleopActionTestFixture::config_ = nullptr;
@@ -130,10 +130,10 @@ TEST_F(CancelAssistedTeleopActionTestFixture, test_ports)
 
   tree_ = std::make_shared<BT::Tree>(factory_->createTreeFromText(xml_txt, config_->blackboard));
   auto send_goal_options = rclcpp_action::Client<
-    nav2_msgs::action::AssistedTeleop>::SendGoalOptions();
+    hm_nav2_msgs::action::AssistedTeleop>::SendGoalOptions();
 
   // Creating a dummy goal_msg
-  auto goal_msg = nav2_msgs::action::AssistedTeleop::Goal();
+  auto goal_msg = hm_nav2_msgs::action::AssistedTeleop::Goal();
 
   // BackUping for server and sending a goal
   client_->wait_for_action_server();

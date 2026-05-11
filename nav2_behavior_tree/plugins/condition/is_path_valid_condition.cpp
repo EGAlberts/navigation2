@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_behavior_tree/plugins/condition/is_path_valid_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_path_valid_condition.hpp"
 #include <chrono>
 #include <memory>
 #include <string>
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 IsPathValidCondition::IsPathValidCondition(
@@ -27,7 +27,7 @@ IsPathValidCondition::IsPathValidCondition(
   max_cost_(253), consider_unknown_as_obstacle_(false)
 {
   node_ = config().blackboard->get<rclcpp::Node::SharedPtr>("node");
-  client_ = std::make_shared<nav2_util::ServiceClient<nav2_msgs::srv::IsPathValid>>("is_path_valid",
+  client_ = std::make_shared<hm_nav2_util::ServiceClient<nav2_msgs::srv::IsPathValid>>("is_path_valid",
       node_, false /* Does not create and spin an internal executor*/);
 
   server_timeout_ = config().blackboard->template get<std::chrono::milliseconds>("server_timeout");
@@ -52,8 +52,7 @@ BT::NodeStatus IsPathValidCondition::tick()
   auto request = std::make_shared<nav2_msgs::srv::IsPathValid::Request>();
 
   request->path = path;
-  request->max_cost = max_cost_;
-  request->consider_unknown_as_obstacle = consider_unknown_as_obstacle_;
+  
   auto response = client_->invoke(request, server_timeout_);
   if (response->is_valid) {
     return BT::NodeStatus::SUCCESS;
@@ -61,10 +60,10 @@ BT::NodeStatus IsPathValidCondition::tick()
   return BT::NodeStatus::FAILURE;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::IsPathValidCondition>("IsPathValid");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::IsPathValidCondition>("IsPathValid");
 }

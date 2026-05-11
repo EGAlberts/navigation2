@@ -18,26 +18,26 @@
 #include <set>
 
 #include "rclcpp/rclcpp.hpp"
-#include "nav2_util/odometry_utils.hpp"
+#include "hm_nav2_util/odometry_utils.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/is_stopped_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_stopped_condition.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-class IsStoppedTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class IsStoppedTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
   {
-    odom_smoother_ = std::make_shared<nav2_util::OdomSmoother>(node_);
+    odom_smoother_ = std::make_shared<hm_nav2_util::OdomSmoother>(node_);
     config_->blackboard->set(
       "odom_smoother", odom_smoother_);  // NOLINT
     // shorten duration_stopped  from default to make the test faster
     std::chrono::milliseconds duration = 100ms;
     config_->input_ports["duration_stopped"] = std::to_string(duration.count()) + "ms";
-    bt_node_ = std::make_shared<nav2_behavior_tree::IsStoppedCondition>("is_stopped", *config_);
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::IsStoppedCondition>("is_stopped", *config_);
   }
 
   void TearDown()
@@ -47,13 +47,13 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::IsStoppedCondition> bt_node_;
-  static std::shared_ptr<nav2_util::OdomSmoother> odom_smoother_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::IsStoppedCondition> bt_node_;
+  static std::shared_ptr<hm_nav2_util::OdomSmoother> odom_smoother_;
 };
 
-std::shared_ptr<nav2_behavior_tree::IsStoppedCondition>
+std::shared_ptr<nav2_behavior_tree_humble_main::IsStoppedCondition>
 IsStoppedTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_util::OdomSmoother>
+std::shared_ptr<hm_nav2_util::OdomSmoother>
 IsStoppedTestFixture::odom_smoother_ = nullptr;
 
 

@@ -15,18 +15,18 @@
 #include <memory>
 #include <string>
 
-#include "nav2_util/node_utils.hpp"
+#include "hm_nav2_util/node_utils.hpp"
 #include "gtest/gtest.h"
 #include "rclcpp/rclcpp.hpp"
 
-using nav2_util::sanitize_node_name;
-using nav2_util::generate_internal_node_name;
-using nav2_util::generate_internal_node;
-using nav2_util::add_namespaces;
-using nav2_util::time_to_string;
-using nav2_util::declare_parameter_if_not_declared;
-using nav2_util::declare_or_get_parameter;
-using nav2_util::get_plugin_type_param;
+using hm_nav2_util::sanitize_node_name;
+using hm_nav2_util::generate_internal_node_name;
+using hm_nav2_util::generate_internal_node;
+using hm_nav2_util::add_namespaces;
+using hm_nav2_util::time_to_string;
+using hm_nav2_util::declare_parameter_if_not_declared;
+using hm_nav2_util::declare_or_get_parameter;
+using hm_nav2_util::get_plugin_type_param;
 
 TEST(SanitizeNodeName, SanitizeNodeName)
 {

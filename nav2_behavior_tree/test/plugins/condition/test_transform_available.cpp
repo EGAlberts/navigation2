@@ -20,7 +20,7 @@
 #include <string>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/transform_available_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/transform_available_condition.hpp"
 
 class TransformAvailableConditionTestFixture : public ::testing::Test
 {
@@ -28,7 +28,7 @@ public:
   static void SetUpTestCase()
   {
     node_ = std::make_shared<rclcpp::Node>("test_behavior_tree_fixture");
-    transform_handler_ = std::make_shared<nav2_behavior_tree::TransformHandler>(node_);
+    transform_handler_ = std::make_shared<nav2_behavior_tree_humble_main::TransformHandler>(node_);
     factory_ = std::make_shared<BT::BehaviorTreeFactory>();
 
     config_ = new BT::NodeConfiguration();
@@ -71,7 +71,7 @@ public:
         </BehaviorTree>
       </root>)";
 
-    factory_->registerNodeType<nav2_behavior_tree::TransformAvailableCondition>(
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::TransformAvailableCondition>(
       "TransformAvailable");
     tree_ = std::make_shared<BT::Tree>(factory_->createTreeFromText(xml_txt, config_->blackboard));
   }
@@ -83,14 +83,14 @@ public:
 
 protected:
   static rclcpp::Node::SharedPtr node_;
-  static std::shared_ptr<nav2_behavior_tree::TransformHandler> transform_handler_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::TransformHandler> transform_handler_;
   static BT::NodeConfiguration * config_;
   static std::shared_ptr<BT::BehaviorTreeFactory> factory_;
   static std::shared_ptr<BT::Tree> tree_;
 };
 
 rclcpp::Node::SharedPtr TransformAvailableConditionTestFixture::node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::TransformHandler>
+std::shared_ptr<nav2_behavior_tree_humble_main::TransformHandler>
 TransformAvailableConditionTestFixture::transform_handler_ = nullptr;
 BT::NodeConfiguration * TransformAvailableConditionTestFixture::config_ = nullptr;
 std::shared_ptr<BT::BehaviorTreeFactory>

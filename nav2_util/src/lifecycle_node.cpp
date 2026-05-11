@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_util/lifecycle_node.hpp"
+#include "hm_nav2_util/lifecycle_node.hpp"
 
 #include <memory>
 #include <string>
 #include <vector>
 
 #include "lifecycle_msgs/msg/state.hpp"
-#include "nav2_util/node_utils.hpp"
+#include "hm_nav2_util/node_utils.hpp"
 
 using namespace std::chrono_literals;
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 LifecycleNode::LifecycleNode(
@@ -38,12 +38,12 @@ LifecycleNode::LifecycleNode(
     rclcpp::Parameter(
       bond::msg::Constants::DISABLE_HEARTBEAT_TIMEOUT_PARAM, true));
 
-  nav2_util::declare_parameter_if_not_declared(
+  hm_nav2_util::declare_parameter_if_not_declared(
     this, "bond_heartbeat_period", rclcpp::ParameterValue(0.1));
   this->get_parameter("bond_heartbeat_period", bond_heartbeat_period);
 
   bool autostart_node = false;
-  nav2_util::declare_parameter_if_not_declared(
+  hm_nav2_util::declare_parameter_if_not_declared(
     this, "autostart_node", rclcpp::ParameterValue(false));
   this->get_parameter("autostart_node", autostart_node);
   if (autostart_node) {
@@ -163,4 +163,4 @@ void LifecycleNode::printLifecycleNodeNotification()
     "\tSee https://design.ros2.org/articles/node_lifecycle.html for more information.", get_name());
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

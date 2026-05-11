@@ -20,12 +20,12 @@
 
 #include "nav_msgs/msg/path.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/append_goal_pose_to_goals_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/append_goal_pose_to_goals_action.hpp"
 #include "utils/test_behavior_tree_fixture.hpp"
 
 class AppendGoalPoseToGoalsTestFixture : public ::testing::Test
@@ -37,7 +37,7 @@ public:
     factory_ = std::make_shared<BT::BehaviorTreeFactory>();
 
     config_ = new BT::NodeConfiguration();
-    transform_handler_ = std::make_shared<nav2_behavior_tree::TransformHandler>(node_);
+    transform_handler_ = std::make_shared<nav2_behavior_tree_humble_main::TransformHandler>(node_);
     transform_handler_->activate();
 
     // Create the blackboard that will be shared by all of the nodes in the tree
@@ -53,11 +53,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::AppendGoalPoseToGoals>(
+        return std::make_unique<nav2_behavior_tree_humble_main::AppendGoalPoseToGoals>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::AppendGoalPoseToGoals>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::AppendGoalPoseToGoals>(
       "AppendGoalPoseToGoals", builder);
   }
 
@@ -81,7 +81,7 @@ protected:
   static BT::NodeConfiguration * config_;
   static std::shared_ptr<BT::BehaviorTreeFactory> factory_;
   static std::shared_ptr<BT::Tree> tree_;
-  static std::shared_ptr<nav2_behavior_tree::TransformHandler> transform_handler_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::TransformHandler> transform_handler_;
 };
 
 rclcpp::Node::SharedPtr AppendGoalPoseToGoalsTestFixture::node_ = nullptr;
@@ -89,7 +89,7 @@ rclcpp::Node::SharedPtr AppendGoalPoseToGoalsTestFixture::node_ = nullptr;
 BT::NodeConfiguration * AppendGoalPoseToGoalsTestFixture::config_ = nullptr;
 std::shared_ptr<BT::BehaviorTreeFactory> AppendGoalPoseToGoalsTestFixture::factory_ = nullptr;
 std::shared_ptr<BT::Tree> AppendGoalPoseToGoalsTestFixture::tree_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::TransformHandler>
+std::shared_ptr<nav2_behavior_tree_humble_main::TransformHandler>
 AppendGoalPoseToGoalsTestFixture::transform_handler_ = nullptr;
 
 TEST_F(AppendGoalPoseToGoalsTestFixture, test_tick)

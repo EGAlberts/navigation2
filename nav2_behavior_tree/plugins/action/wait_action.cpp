@@ -16,9 +16,9 @@
 #include <memory>
 #include <cmath>
 
-#include "nav2_behavior_tree/plugins/action/wait_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/wait_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 WaitAction::WaitAction(
@@ -52,34 +52,8 @@ void WaitAction::on_tick()
   increment_recovery_count();
 }
 
-BT::NodeStatus WaitAction::on_success()
-{
-  setOutput("error_code_id", ActionResult::NONE);
-  setOutput("error_msg", "");
-  return BT::NodeStatus::SUCCESS;
-}
 
-BT::NodeStatus WaitAction::on_aborted()
-{
-  setOutput("error_code_id", result_.result->error_code);
-  setOutput("error_msg", result_.result->error_msg);
-  return BT::NodeStatus::FAILURE;
-}
-
-BT::NodeStatus WaitAction::on_cancelled()
-{
-  setOutput("error_code_id", ActionResult::NONE);
-  setOutput("error_msg", "");
-  return BT::NodeStatus::SUCCESS;
-}
-
-void WaitAction::on_timeout()
-{
-  setOutput("error_code_id", ActionResult::TIMEOUT);
-  setOutput("error_msg", "Behavior Tree action client timed out waiting.");
-}
-
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -87,8 +61,8 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::WaitAction>(name, "wait", config);
+      return std::make_unique<nav2_behavior_tree_humble_main::WaitAction>(name, "wait", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::WaitAction>("Wait", builder);
+  factory.registerBuilder<nav2_behavior_tree_humble_main::WaitAction>("Wait", builder);
 }

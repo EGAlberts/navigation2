@@ -15,9 +15,9 @@
 #include <string>
 #include <memory>
 
-#include "nav2_behavior_tree/plugins/action/clear_costmap_service.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/clear_costmap_service.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 ClearEntireCostmapService::ClearEntireCostmapService(
@@ -58,14 +58,14 @@ void ClearCostmapAroundRobotService::on_tick()
   increment_recovery_count();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::ClearEntireCostmapService>("ClearEntireCostmap");
-  factory.registerNodeType<nav2_behavior_tree::ClearCostmapExceptRegionService>(
+  factory.registerNodeType<nav2_behavior_tree_humble_main::ClearEntireCostmapService>("ClearEntireCostmap");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::ClearCostmapExceptRegionService>(
     "ClearCostmapExceptRegion");
-  factory.registerNodeType<nav2_behavior_tree::ClearCostmapAroundRobotService>(
+  factory.registerNodeType<nav2_behavior_tree_humble_main::ClearCostmapAroundRobotService>(
     "ClearCostmapAroundRobot");
 }

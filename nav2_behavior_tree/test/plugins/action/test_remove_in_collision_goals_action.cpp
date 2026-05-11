@@ -21,7 +21,7 @@
 #include "behaviortree_cpp/bt_factory.h"
 
 #include "utils/test_service.hpp"
-#include "nav2_behavior_tree/plugins/action/remove_in_collision_goals_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/remove_in_collision_goals_action.hpp"
 #include "utils/test_behavior_tree_fixture.hpp"
 
 
@@ -92,11 +92,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::RemoveInCollisionGoals>(
+        return std::make_unique<nav2_behavior_tree_humble_main::RemoveInCollisionGoals>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::RemoveInCollisionGoals>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::RemoveInCollisionGoals>(
       "RemoveInCollisionGoals", builder);
   }
 
@@ -217,7 +217,7 @@ TEST_F(RemoveInCollisionGoalsTestFixture,
   config_->blackboard->set("goals", poses);
 
   // create waypoint_statuses and set it on blackboard
-  std::vector<nav2_msgs::msg::WaypointStatus> waypoint_statuses(poses.goals.size());
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> waypoint_statuses(poses.goals.size());
   for (size_t i = 0 ; i < waypoint_statuses.size() ; ++i) {
     waypoint_statuses[i].waypoint_pose = poses.goals[i];
     waypoint_statuses[i].waypoint_index = i;
@@ -241,13 +241,13 @@ TEST_F(RemoveInCollisionGoalsTestFixture,
   EXPECT_EQ(output_poses.goals[2], poses.goals[2]);
 
   // check the waypoint_statuses
-  std::vector<nav2_msgs::msg::WaypointStatus> output_waypoint_statuses;
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> output_waypoint_statuses;
   EXPECT_TRUE(config_->blackboard->get("waypoint_statuses", output_waypoint_statuses));
   EXPECT_EQ(output_waypoint_statuses.size(), 4u);
-  EXPECT_EQ(output_waypoint_statuses[0].waypoint_status, nav2_msgs::msg::WaypointStatus::PENDING);
-  EXPECT_EQ(output_waypoint_statuses[1].waypoint_status, nav2_msgs::msg::WaypointStatus::PENDING);
-  EXPECT_EQ(output_waypoint_statuses[2].waypoint_status, nav2_msgs::msg::WaypointStatus::PENDING);
-  EXPECT_EQ(output_waypoint_statuses[3].waypoint_status, nav2_msgs::msg::WaypointStatus::SKIPPED);
+  EXPECT_EQ(output_waypoint_statuses[0].waypoint_status, hm_nav2_msgs::msg::WaypointStatus::PENDING);
+  EXPECT_EQ(output_waypoint_statuses[1].waypoint_status, hm_nav2_msgs::msg::WaypointStatus::PENDING);
+  EXPECT_EQ(output_waypoint_statuses[2].waypoint_status, hm_nav2_msgs::msg::WaypointStatus::PENDING);
+  EXPECT_EQ(output_waypoint_statuses[3].waypoint_status, hm_nav2_msgs::msg::WaypointStatus::SKIPPED);
 }
 
 TEST_F(RemoveInCollisionGoalsTestFixture,
@@ -286,7 +286,7 @@ TEST_F(RemoveInCollisionGoalsTestFixture,
   config_->blackboard->set("goals", poses);
 
   // create waypoint_statuses and set it on blackboard
-  std::vector<nav2_msgs::msg::WaypointStatus> waypoint_statuses(poses.goals.size());
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> waypoint_statuses(poses.goals.size());
   for (size_t i = 0 ; i < waypoint_statuses.size() ; ++i) {
     waypoint_statuses[i].waypoint_pose = poses.goals[i];
     waypoint_statuses[i].waypoint_index = i;

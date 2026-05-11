@@ -22,12 +22,12 @@
 #include "geometry_msgs/msg/pose_stamped.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/goal_reached_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/goal_reached_condition.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-class GoalReachedConditionTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class GoalReachedConditionTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
@@ -49,7 +49,7 @@ public:
         </BehaviorTree>
       </root>)";
 
-    factory_->registerNodeType<nav2_behavior_tree::GoalReachedCondition>("GoalReached");
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::GoalReachedCondition>("GoalReached");
     tree_ = std::make_shared<BT::Tree>(factory_->createTreeFromText(xml_txt, config_->blackboard));
   }
 

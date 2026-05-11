@@ -19,10 +19,10 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/assisted_teleop_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/assisted_teleop_action.hpp"
 
-class AssistedTeleopActionServer : public TestActionServer<nav2_msgs::action::AssistedTeleop>
+class AssistedTeleopActionServer : public TestActionServer<hm_nav2_msgs::action::AssistedTeleop>
 {
 public:
   AssistedTeleopActionServer()
@@ -32,12 +32,12 @@ public:
 protected:
   void execute(
     const typename std::shared_ptr<
-      rclcpp_action::ServerGoalHandle<nav2_msgs::action::AssistedTeleop>>
+      rclcpp_action::ServerGoalHandle<hm_nav2_msgs::action::AssistedTeleop>>
     goal_handle)
   override
   {
-    nav2_msgs::action::AssistedTeleop::Result::SharedPtr result =
-      std::make_shared<nav2_msgs::action::AssistedTeleop::Result>();
+    hm_nav2_msgs::action::AssistedTeleop::Result::SharedPtr result =
+      std::make_shared<hm_nav2_msgs::action::AssistedTeleop::Result>();
     bool return_success = getReturnSuccess();
     if (return_success) {
       goal_handle->succeed(result);
@@ -77,11 +77,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::AssistedTeleopAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::AssistedTeleopAction>(
           name, "assisted_teleop", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::AssistedTeleopAction>("AssistedTeleop", builder);
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::AssistedTeleopAction>("AssistedTeleop", builder);
   }
 
   static void TearDownTestCase()

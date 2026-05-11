@@ -21,15 +21,15 @@
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "nav_msgs/msg/path.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "tf2/LinearMath/Matrix3x3.hpp"
 #include "tf2/LinearMath/Quaternion.hpp"
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/truncate_path_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/truncate_path_action.hpp"
 
 
 class TruncatePathTestFixture : public ::testing::Test
@@ -52,11 +52,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::TruncatePath>(
+        return std::make_unique<nav2_behavior_tree_humble_main::TruncatePath>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::TruncatePath>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::TruncatePath>(
       "TruncatePath", builder);
   }
 
@@ -106,7 +106,7 @@ TEST_F(TruncatePathTestFixture, test_tick)
   geometry_msgs::msg::PoseStamped pose;
   pose.pose.position.x = 0;
   pose.pose.position.y = 0;
-  pose.pose.orientation = nav2_util::geometry_utils::orientationAroundZAxis(0.0);
+  pose.pose.orientation = hm_nav2_util::geometry_utils::orientationAroundZAxis(0.0);
   path.poses.push_back(pose);
 
   pose.pose.position.x = 0.5;

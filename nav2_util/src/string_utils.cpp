@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_util/string_utils.hpp"
+#include "hm_nav2_util/string_utils.hpp"
 #include <string>
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 std::string strip_leading_slash(const std::string & in)
@@ -43,4 +43,4 @@ Tokens split(const std::string & tokenstring, char delimiter)
   return tokens;
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

@@ -1,6 +1,6 @@
 # Nav2 Util
 
-The `nav2_util` package contains utilities abstracted from individual packages which may find use in other uses. Some examples of things you'll find here:
+The `hm_nav2_util` package contains utilities abstracted from individual packages which may find use in other uses. Some examples of things you'll find here:
 
 - Geometry utilities for computing distances and values in paths
 - A Nav2 specific lifecycle node wrapper for boilerplate code and useful common utilities like `declare_parameter_if_not_declared()`

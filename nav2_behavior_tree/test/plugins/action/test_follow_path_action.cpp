@@ -23,8 +23,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/follow_path_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/follow_path_action.hpp"
 
 class FollowPathActionServer : public TestActionServer<nav2_msgs::action::FollowPath>
 {
@@ -75,11 +75,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::FollowPathAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::FollowPathAction>(
           name, "follow_path", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::FollowPathAction>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::FollowPathAction>(
       "FollowPath", builder);
   }
 

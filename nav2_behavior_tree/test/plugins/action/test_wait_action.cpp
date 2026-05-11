@@ -20,8 +20,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/wait_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/wait_action.hpp"
 
 class WaitActionServer : public TestActionServer<nav2_msgs::action::Wait>
 {
@@ -68,11 +68,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::WaitAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::WaitAction>(
           name, "wait", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::WaitAction>("Wait", builder);
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::WaitAction>("Wait", builder);
   }
 
   static void TearDownTestCase()

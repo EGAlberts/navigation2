@@ -20,20 +20,20 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/is_stuck_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_stuck_condition.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-class IsStuckTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class IsStuckTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
   {
-    bt_node_ = std::make_shared<nav2_behavior_tree::IsStuckCondition>("is_stuck", *config_);
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::IsStuckCondition>("is_stuck", *config_);
   }
 
   void TearDown()
@@ -42,10 +42,10 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::IsStuckCondition> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::IsStuckCondition> bt_node_;
 };
 
-std::shared_ptr<nav2_behavior_tree::IsStuckCondition>
+std::shared_ptr<nav2_behavior_tree_humble_main::IsStuckCondition>
 IsStuckTestFixture::bt_node_ = nullptr;
 
 TEST_F(IsStuckTestFixture, test_behavior)

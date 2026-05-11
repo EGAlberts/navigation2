@@ -22,7 +22,7 @@
 #include "geometry_msgs/msg/pose_stamped.hpp"
 
 #include "behaviortree_cpp/bt_factory.h"
-#include "nav2_behavior_tree/bt_utils.hpp"
+#include "nav2_behavior_tree_humble_main/bt_utils.hpp"
 
 template<typename T>
 class TestNode : public BT::SyncActionNode
@@ -398,7 +398,7 @@ TEST(WaypointStatusPortTest, test_wrong_syntax)
       </root>)";
 
   BT::BehaviorTreeFactory factory;
-  factory.registerNodeType<TestNode<nav2_msgs::msg::WaypointStatus>>("WaypointStatusPort");
+  factory.registerNodeType<TestNode<hm_nav2_msgs::msg::WaypointStatus>>("WaypointStatusPort");
   EXPECT_THROW(factory.createTreeFromText(xml_txt), std::exception);
 
   xml_txt =
@@ -423,10 +423,10 @@ TEST(WaypointStatusPortTest, test_correct_syntax)
       </root>)";
 
   BT::BehaviorTreeFactory factory;
-  factory.registerNodeType<TestNode<nav2_msgs::msg::WaypointStatus>>("WaypointStatusPort");
+  factory.registerNodeType<TestNode<hm_nav2_msgs::msg::WaypointStatus>>("WaypointStatusPort");
   auto tree = factory.createTreeFromText(xml_txt);
 
-  nav2_msgs::msg::WaypointStatus values;
+  hm_nav2_msgs::msg::WaypointStatus values;
   tree.rootNode()->getInput("test", values);
   EXPECT_EQ(values.waypoint_status, 0);
   EXPECT_EQ(values.waypoint_index, 1);
@@ -453,7 +453,7 @@ TEST(WaypointStatusVectorPortTest, test_wrong_syntax) {
       </root>)";
 
   BT::BehaviorTreeFactory factory;
-  factory.registerNodeType<TestNode<std::vector<nav2_msgs::msg::WaypointStatus>>>(
+  factory.registerNodeType<TestNode<std::vector<hm_nav2_msgs::msg::WaypointStatus>>>(
     "WaypointStatusVectorPort");
   EXPECT_THROW(factory.createTreeFromText(xml_txt), std::exception);
 
@@ -479,11 +479,11 @@ TEST(WaypointStatusVectorPortTest, test_correct_syntax)
       </root>)";
 
   BT::BehaviorTreeFactory factory;
-  factory.registerNodeType<TestNode<std::vector<nav2_msgs::msg::WaypointStatus>>>(
+  factory.registerNodeType<TestNode<std::vector<hm_nav2_msgs::msg::WaypointStatus>>>(
     "WaypointStatusVectorPort");
   auto tree = factory.createTreeFromText(xml_txt);
 
-  std::vector<nav2_msgs::msg::WaypointStatus> values;
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> values;
   tree.rootNode()->getInput("test", values);
   EXPECT_EQ(values[0].waypoint_status, 0);
   EXPECT_EQ(values[0].waypoint_index, 1);

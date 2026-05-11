@@ -20,8 +20,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/back_up_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/back_up_action.hpp"
 
 class BackUpActionServer : public TestActionServer<nav2_msgs::action::BackUp>
 {
@@ -77,11 +77,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::BackUpAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::BackUpAction>(
           name, "backup", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::BackUpAction>("BackUp", builder);
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::BackUpAction>("BackUp", builder);
   }
 
   static void TearDownTestCase()

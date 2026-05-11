@@ -19,11 +19,11 @@
 
 #include "behaviortree_cpp/decorator_node.h"
 
-#include "nav2_behavior_tree/plugins/decorator/goal_updater_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/goal_updater_node.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 using std::placeholders::_1;
@@ -162,10 +162,10 @@ GoalUpdater::callback_updated_goals(const nav_msgs::msg::Goals::SharedPtr msg)
   last_goals_received_set_ = true;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GoalUpdater>("GoalUpdater");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GoalUpdater>("GoalUpdater");
 }

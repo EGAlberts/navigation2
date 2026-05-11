@@ -17,10 +17,10 @@
 #include <map>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/would_a_smoother_recovery_help_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/would_a_smoother_recovery_help_condition.hpp"
 #include "nav2_msgs/action/smooth_path.hpp"
 
-class WouldASmootherRecoveryHelpFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class WouldASmootherRecoveryHelpFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   using Action = nav2_msgs::action::SmoothPath;
@@ -38,7 +38,7 @@ public:
         </BehaviorTree>
       </root>)";
 
-    factory_->registerNodeType<nav2_behavior_tree::WouldASmootherRecoveryHelp>(
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::WouldASmootherRecoveryHelp>(
       "WouldASmootherRecoveryHelp");
     tree_ = std::make_shared<BT::Tree>(factory_->createTreeFromText(xml_txt, config_->blackboard));
   }

@@ -15,9 +15,9 @@
 #include <memory>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/action/navigate_to_pose_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/navigate_to_pose_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 NavigateToPoseAction::NavigateToPoseAction(
@@ -66,7 +66,7 @@ void NavigateToPoseAction::on_timeout()
   setOutput("error_msg", "Behavior Tree action client timed out waiting.");
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -74,10 +74,10 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::NavigateToPoseAction>(
+      return std::make_unique<nav2_behavior_tree_humble_main::NavigateToPoseAction>(
         name, "navigate_to_pose", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::NavigateToPoseAction>(
+  factory.registerBuilder<nav2_behavior_tree_humble_main::NavigateToPoseAction>(
     "NavigateToPose", builder);
 }

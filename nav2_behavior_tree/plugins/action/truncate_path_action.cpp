@@ -19,12 +19,12 @@
 
 #include "nav_msgs/msg/path.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 #include "behaviortree_cpp/decorator_node.h"
 
-#include "nav2_behavior_tree/plugins/action/truncate_path_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/truncate_path_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 TruncatePath::TruncatePath(
@@ -51,12 +51,12 @@ inline BT::NodeStatus TruncatePath::tick()
 
   geometry_msgs::msg::PoseStamped final_pose = input_path.poses.back();
 
-  double distance_to_goal = nav2_util::geometry_utils::euclidean_distance(
+  double distance_to_goal = hm_nav2_util::geometry_utils::euclidean_distance(
     input_path.poses.back(), final_pose);
 
   while (distance_to_goal < distance_ && input_path.poses.size() > 2) {
     input_path.poses.pop_back();
-    distance_to_goal = nav2_util::geometry_utils::euclidean_distance(
+    distance_to_goal = hm_nav2_util::geometry_utils::euclidean_distance(
       input_path.poses.back(), final_pose);
   }
 
@@ -72,7 +72,7 @@ inline BT::NodeStatus TruncatePath::tick()
     final_angle = 0.0;
   }
 
-  input_path.poses.back().pose.orientation = nav2_util::geometry_utils::orientationAroundZAxis(
+  input_path.poses.back().pose.orientation = hm_nav2_util::geometry_utils::orientationAroundZAxis(
     final_angle);
 
   setOutput("output_path", input_path);
@@ -80,10 +80,10 @@ inline BT::NodeStatus TruncatePath::tick()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::TruncatePath>("TruncatePath");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::TruncatePath>("TruncatePath");
 }

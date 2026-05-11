@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>nav2_behavior_tree</name>
+  <name>nav2_behavior_tree_humble_main</name>
   <version>1.4.0</version>
   <description>Nav2 behavior tree wrappers, nodes, and utilities</description>
   <maintainer email="michael.jeronimo@intel.com">Michael Jeronimo</maintainer>
@@ -16,7 +16,7 @@
   <depend>geometry_msgs</depend>
   <depend>nav2_common</depend>
   <depend>nav2_msgs</depend>
-  <depend>nav2_util</depend>
+  <depend>hm_nav2_util</depend>
   <depend>nav_msgs</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_action</depend>

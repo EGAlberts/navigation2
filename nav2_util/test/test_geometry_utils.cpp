@@ -13,15 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 #include "geometry_msgs/msg/point.hpp"
 #include "geometry_msgs/msg/pose.hpp"
 #include "nav_msgs/msg/path.hpp"
 #include "gtest/gtest.h"
 
-using nav2_util::geometry_utils::euclidean_distance;
-using nav2_util::geometry_utils::calculate_path_length;
-using nav2_util::geometry_utils::find_next_matching_goal_in_waypoint_statuses;
+using hm_nav2_util::geometry_utils::euclidean_distance;
+using hm_nav2_util::geometry_utils::calculate_path_length;
+using hm_nav2_util::geometry_utils::find_next_matching_goal_in_waypoint_statuses;
 
 TEST(GeometryUtils, euclidean_distance_point_3d)
 {
@@ -135,7 +135,7 @@ TEST(GeometryUtils, find_next_matching_goal_in_waypoint_statuses)
   size_t nb_waypoints = 10;
   float distance_between_waypoints = 2.0;
 
-  std::vector<nav2_msgs::msg::WaypointStatus> waypoint_statuses(nb_waypoints);
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> waypoint_statuses(nb_waypoints);
   for (size_t i = 0 ; i < nb_waypoints ; ++i) {
     waypoint_statuses[i].waypoint_index = i;
     waypoint_statuses[i].waypoint_pose.pose.position.x = distance_between_waypoints * i;
@@ -152,7 +152,7 @@ TEST(GeometryUtils, find_next_matching_goal_in_waypoint_statuses)
   ASSERT_EQ(find_next_matching_goal_in_waypoint_statuses(waypoint_statuses, fake_pose), -1);
 
   // match failed due to waypoint_status is not PENDING
-  waypoint_statuses[matching_index].waypoint_status = nav2_msgs::msg::WaypointStatus::COMPLETED;
+  waypoint_statuses[matching_index].waypoint_status = hm_nav2_msgs::msg::WaypointStatus::COMPLETED;
   ASSERT_EQ(find_next_matching_goal_in_waypoint_statuses(waypoint_statuses,
     waypoint_statuses[matching_index].waypoint_pose), -1);
 }

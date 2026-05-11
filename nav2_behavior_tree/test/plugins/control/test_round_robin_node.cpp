@@ -18,18 +18,18 @@
 
 #include "utils/test_behavior_tree_fixture.hpp"
 #include "utils/test_dummy_tree_node.hpp"
-#include "nav2_behavior_tree/plugins/control/round_robin_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/control/round_robin_node.hpp"
 
-class RoundRobinNodeTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class RoundRobinNodeTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp() override
   {
-    bt_node_ = std::make_shared<nav2_behavior_tree::RoundRobinNode>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::RoundRobinNode>(
       "round_robin", *config_);
-    first_child_ = std::make_shared<nav2_behavior_tree::DummyNode>();
-    second_child_ = std::make_shared<nav2_behavior_tree::DummyNode>();
-    third_child_ = std::make_shared<nav2_behavior_tree::DummyNode>();
+    first_child_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
+    second_child_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
+    third_child_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
     bt_node_->addChild(first_child_.get());
     bt_node_->addChild(second_child_.get());
     bt_node_->addChild(third_child_.get());
@@ -44,16 +44,16 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::RoundRobinNode> bt_node_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> first_child_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> second_child_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> third_child_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::RoundRobinNode> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> first_child_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> second_child_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> third_child_;
 };
 
-std::shared_ptr<nav2_behavior_tree::RoundRobinNode> RoundRobinNodeTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode> RoundRobinNodeTestFixture::first_child_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode> RoundRobinNodeTestFixture::second_child_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode> RoundRobinNodeTestFixture::third_child_ = nullptr;
+std::shared_ptr<nav2_behavior_tree_humble_main::RoundRobinNode> RoundRobinNodeTestFixture::bt_node_ = nullptr;
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> RoundRobinNodeTestFixture::first_child_ = nullptr;
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> RoundRobinNodeTestFixture::second_child_ = nullptr;
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> RoundRobinNodeTestFixture::third_child_ = nullptr;
 
 TEST_F(RoundRobinNodeTestFixture, test_failure_on_idle_child)
 {

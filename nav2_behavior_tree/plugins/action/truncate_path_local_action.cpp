@@ -20,17 +20,17 @@
 
 #include "behaviortree_cpp/decorator_node.h"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/geometry_utils.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 #include "nav_msgs/msg/path.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "tf2/LinearMath/Quaternion.hpp"
 #include "tf2_ros/buffer.h"
 #include "tf2_ros/create_timer_ros.h"
 
-#include "nav2_behavior_tree/plugins/action/truncate_path_local_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/truncate_path_local_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 TruncatePathLocal::TruncatePathLocal(
@@ -76,12 +76,12 @@ inline BT::NodeStatus TruncatePathLocal::tick()
 
   auto closest_pose_detection_end = path_.poses.end();
   if (path_pruning) {
-    closest_pose_detection_end = nav2_util::geometry_utils::first_after_integrated_distance(
+    closest_pose_detection_end = hm_nav2_util::geometry_utils::first_after_integrated_distance(
       closest_pose_detection_begin_, path_.poses.end(), max_robot_pose_search_dist);
   }
 
   // find the closest pose on the path
-  auto current_pose = nav2_util::geometry_utils::min_by(
+  auto current_pose = hm_nav2_util::geometry_utils::min_by(
     closest_pose_detection_begin_, closest_pose_detection_end,
     [&pose, angular_distance_weight](const geometry_msgs::msg::PoseStamped & ps) {
       return poseDistance(pose, ps, angular_distance_weight);
@@ -92,12 +92,12 @@ inline BT::NodeStatus TruncatePathLocal::tick()
   }
 
   // expand forwards to extract desired length
-  auto forward_pose_it = nav2_util::geometry_utils::first_after_integrated_distance(
+  auto forward_pose_it = hm_nav2_util::geometry_utils::first_after_integrated_distance(
     current_pose, path_.poses.end(), distance_forward);
 
   // expand backwards to extract desired length
   // Note: current_pose + 1 is used because reverse iterator points to a cell before it
-  auto backward_pose_it = nav2_util::geometry_utils::first_after_integrated_distance(
+  auto backward_pose_it = hm_nav2_util::geometry_utils::first_after_integrated_distance(
     std::reverse_iterator(current_pose + 1), path_.poses.rend(), distance_backward);
 
   nav_msgs::msg::Path output_path;
@@ -122,7 +122,7 @@ inline bool TruncatePathLocal::getRobotPose(
     }
     double transform_tolerance;
     getInput("transform_tolerance", transform_tolerance);
-    if (!nav2_util::getCurrentPose(
+    if (!hm_nav2_util::getCurrentPose(
         pose, *tf_buffer_, path_frame_id, robot_frame, transform_tolerance))
     {
       RCLCPP_WARN(
@@ -152,10 +152,10 @@ TruncatePathLocal::poseDistance(
   return std::sqrt(dx * dx + dy * dy + da * da);
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory) {
-  factory.registerNodeType<nav2_behavior_tree::TruncatePathLocal>(
+  factory.registerNodeType<nav2_behavior_tree_humble_main::TruncatePathLocal>(
     "TruncatePathLocal");
 }

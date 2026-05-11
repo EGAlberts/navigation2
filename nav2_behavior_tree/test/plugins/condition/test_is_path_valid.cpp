@@ -20,11 +20,11 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 #include "utils/test_service.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/is_path_valid_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_path_valid_condition.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
@@ -60,7 +60,7 @@ public:
     config_->blackboard->set<std::chrono::milliseconds>(
       "server_timeout",
       std::chrono::milliseconds(10));
-    factory_->registerNodeType<nav2_behavior_tree::IsPathValidCondition>("IsPathValid");
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::IsPathValidCondition>("IsPathValid");
   }
 
   void TearDown()

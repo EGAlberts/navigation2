@@ -16,7 +16,7 @@
 #include <chrono>
 
 #include "rclcpp/rclcpp.hpp"
-#include "nav2_util/odometry_utils.hpp"
+#include "hm_nav2_util/odometry_utils.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 #include "gtest/gtest.h"
@@ -27,7 +27,7 @@ using namespace std::chrono_literals;  // NOLINT
 TEST(OdometryUtils, test_uninitialized)
 {
   auto node = std::make_shared<rclcpp::Node>("test_node");
-  nav2_util::OdomSmoother odom_smoother(node, 0.3, "odom");
+  hm_nav2_util::OdomSmoother odom_smoother(node, 0.3, "odom");
   geometry_msgs::msg::Twist twist_msg;
   geometry_msgs::msg::TwistStamped twist_stamped_msg;
 
@@ -57,7 +57,7 @@ TEST(OdometryUtils, test_smoothed_velocity)
   auto node = std::make_shared<rclcpp::Node>("test_node");
   auto odom_pub = node->create_publisher<nav_msgs::msg::Odometry>("odom", 1);
 
-  nav2_util::OdomSmoother odom_smoother(node, 0.3, "odom");
+  hm_nav2_util::OdomSmoother odom_smoother(node, 0.3, "odom");
 
   nav_msgs::msg::Odometry odom_msg;
   geometry_msgs::msg::Twist twist_msg;

@@ -19,8 +19,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/spin_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/spin_cancel_node.hpp"
 #include "lifecycle_msgs/srv/change_state.hpp"
 
 class CancelSpinServer : public TestActionServer<nav2_msgs::action::Spin>
@@ -73,11 +73,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::SpinCancel>(
+        return std::make_unique<nav2_behavior_tree_humble_main::SpinCancel>(
           name, "spin", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::SpinCancel>("CancelSpin", builder);
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::SpinCancel>("CancelSpin", builder);
   }
 
   static void TearDownTestCase()

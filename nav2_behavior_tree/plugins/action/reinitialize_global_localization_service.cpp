@@ -13,9 +13,9 @@
 // limitations under the License.
 
 #include <string>
-#include "nav2_behavior_tree/plugins/action/reinitialize_global_localization_service.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/reinitialize_global_localization_service.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 ReinitializeGlobalLocalizationService::ReinitializeGlobalLocalizationService(
@@ -24,11 +24,11 @@ ReinitializeGlobalLocalizationService::ReinitializeGlobalLocalizationService(
 : BtServiceNode<std_srvs::srv::Empty>(service_node_name, conf)
 {}
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::ReinitializeGlobalLocalizationService>(
+  factory.registerNodeType<nav2_behavior_tree_humble_main::ReinitializeGlobalLocalizationService>(
     "ReinitializeGlobalLocalization");
 }

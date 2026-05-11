@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_behavior_tree/plugins/condition/would_a_planner_recovery_help_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/would_a_planner_recovery_help_condition.hpp"
 #include <memory>
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 WouldAPlannerRecoveryHelp::WouldAPlannerRecoveryHelp(
@@ -33,11 +33,11 @@ WouldAPlannerRecoveryHelp::WouldAPlannerRecoveryHelp(
   };
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::WouldAPlannerRecoveryHelp>(
+  factory.registerNodeType<nav2_behavior_tree_humble_main::WouldAPlannerRecoveryHelp>(
     "WouldAPlannerRecoveryHelp");
 }

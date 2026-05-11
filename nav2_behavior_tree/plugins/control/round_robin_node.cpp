@@ -14,9 +14,9 @@
 
 #include <string>
 
-#include "nav2_behavior_tree/plugins/control/round_robin_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/control/round_robin_node.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 RoundRobinNode::RoundRobinNode(const std::string & name)
@@ -89,9 +89,9 @@ void RoundRobinNode::halt()
   num_failed_children_ = 0;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::RoundRobinNode>("RoundRobin");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::RoundRobinNode>("RoundRobin");
 }

@@ -24,8 +24,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/navigate_to_pose_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/navigate_to_pose_action.hpp"
 
 class NavigateToPoseActionServer : public TestActionServer<nav2_msgs::action::NavigateToPose>
 {
@@ -76,11 +76,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::NavigateToPoseAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::NavigateToPoseAction>(
           name, "navigate_to_pose", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::NavigateToPoseAction>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::NavigateToPoseAction>(
       "NavigateToPose", builder);
   }
 

@@ -17,8 +17,8 @@
 #include <thread>
 
 #include "gtest/gtest.h"
-#include "nav2_util/node_utils.hpp"
-#include "nav2_util/simple_action_server.hpp"
+#include "hm_nav2_util/node_utils.hpp"
+#include "hm_nav2_util/simple_action_server.hpp"
 #include "test_msgs/action/fibonacci.hpp"
 #include "std_msgs/msg/empty.hpp"
 
@@ -42,7 +42,7 @@ public:
 
   void on_init()
   {
-    action_server_ = std::make_shared<nav2_util::SimpleActionServer<Fibonacci>>(
+    action_server_ = std::make_shared<hm_nav2_util::SimpleActionServer<Fibonacci>>(
       shared_from_this(),
       "fibonacci",
       std::bind(&FibonacciServerNode::execute, this));
@@ -136,7 +136,7 @@ preempted:
   }
 
 private:
-  std::shared_ptr<nav2_util::SimpleActionServer<Fibonacci>> action_server_;
+  std::shared_ptr<hm_nav2_util::SimpleActionServer<Fibonacci>> action_server_;
   rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr deactivate_subs_;
   rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr activate_subs_;
   rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr omit_preempt_subs_;
@@ -192,7 +192,7 @@ class ActionTestNode : public rclcpp::Node
 {
 public:
   ActionTestNode()
-  : rclcpp::Node(nav2_util::generate_internal_node_name("action_test_node"))
+  : rclcpp::Node(hm_nav2_util::generate_internal_node_name("action_test_node"))
   {
   }
 

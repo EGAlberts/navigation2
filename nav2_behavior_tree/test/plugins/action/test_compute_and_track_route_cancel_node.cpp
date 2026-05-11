@@ -19,8 +19,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/compute_and_track_route_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/compute_and_track_route_cancel_node.hpp"
 #include "lifecycle_msgs/srv/change_state.hpp"
 
 class CancelComputeAndTrackRouteServer
@@ -75,11 +75,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::ComputeAndTrackRouteCancel>(
+        return std::make_unique<nav2_behavior_tree_humble_main::ComputeAndTrackRouteCancel>(
           name, "compute_and_track_route", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::ComputeAndTrackRouteCancel>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::ComputeAndTrackRouteCancel>(
       "CancelComputeAndTrackRoute", builder);
   }
 

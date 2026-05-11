@@ -23,8 +23,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/decorator/goal_updater_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/goal_updater_node.hpp"
 
 
 class GoalUpdaterTestFixture : public ::testing::Test
@@ -47,11 +47,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::GoalUpdater>(
+        return std::make_unique<nav2_behavior_tree_humble_main::GoalUpdater>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::GoalUpdater>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::GoalUpdater>(
       "GoalUpdater", builder);
   }
 

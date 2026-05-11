@@ -25,8 +25,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/get_pose_from_path_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/get_pose_from_path_action.hpp"
 #include "utils/test_behavior_tree_fixture.hpp"
 
 class GetPoseFromPathTestFixture : public ::testing::Test
@@ -49,11 +49,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::GetPoseFromPath>(
+        return std::make_unique<nav2_behavior_tree_humble_main::GetPoseFromPath>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::GetPoseFromPath>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::GetPoseFromPath>(
       "GetPoseFromPath", builder);
   }
 

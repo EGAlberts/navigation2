@@ -19,15 +19,15 @@
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "nav_msgs/msg/path.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/path_expiring_timer_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/path_expiring_timer_condition.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-class PathExpiringTimerConditionTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class PathExpiringTimerConditionTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
@@ -39,7 +39,7 @@ public:
 
     config_->blackboard = BT::Blackboard::create();
     config_->blackboard->set("node", node_);
-    bt_node_ = std::make_shared<nav2_behavior_tree::PathExpiringTimerCondition>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::PathExpiringTimerCondition>(
       "time_expired", *config_);
   }
 
@@ -53,12 +53,12 @@ public:
 
 protected:
   static rclcpp::Node::SharedPtr node_;
-  static std::shared_ptr<nav2_behavior_tree::PathExpiringTimerCondition> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::PathExpiringTimerCondition> bt_node_;
   static BT::NodeConfiguration * config_;
 };
 
 rclcpp::Node::SharedPtr PathExpiringTimerConditionTestFixture::node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::PathExpiringTimerCondition>
+std::shared_ptr<nav2_behavior_tree_humble_main::PathExpiringTimerCondition>
 PathExpiringTimerConditionTestFixture::bt_node_ = nullptr;
 BT::NodeConfiguration * PathExpiringTimerConditionTestFixture::config_ = nullptr;
 

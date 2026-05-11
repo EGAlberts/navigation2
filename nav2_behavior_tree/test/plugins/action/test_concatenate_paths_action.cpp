@@ -20,15 +20,15 @@
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "nav_msgs/msg/path.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "tf2/LinearMath/Matrix3x3.hpp"
 #include "tf2/LinearMath/Quaternion.hpp"
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/concatenate_paths_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/concatenate_paths_action.hpp"
 
 
 class ConcatenatePathsTestFixture : public ::testing::Test
@@ -51,11 +51,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::ConcatenatePaths>(
+        return std::make_unique<nav2_behavior_tree_humble_main::ConcatenatePaths>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::ConcatenatePaths>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::ConcatenatePaths>(
       "ConcatenatePaths", builder);
   }
 

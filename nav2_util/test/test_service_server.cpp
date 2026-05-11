@@ -14,13 +14,13 @@
 
 #include <memory>
 #include <string>
-#include "nav2_util/service_server.hpp"
+#include "hm_nav2_util/service_server.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "std_srvs/srv/empty.hpp"
 #include "std_msgs/msg/empty.hpp"
 #include "gtest/gtest.h"
 
-using nav2_util::ServiceServer;
+using hm_nav2_util::ServiceServer;
 using std::string;
 
 class RclCppFixture

@@ -17,9 +17,9 @@
 
 #include "std_msgs/msg/string.hpp"
 
-#include "nav2_behavior_tree/plugins/action/spin_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/spin_cancel_node.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 SpinCancel::SpinCancel(
@@ -30,7 +30,7 @@ SpinCancel::SpinCancel(
 {
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -38,10 +38,10 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::SpinCancel>(
+      return std::make_unique<nav2_behavior_tree_humble_main::SpinCancel>(
         name, "spin", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::SpinCancel>(
+  factory.registerBuilder<nav2_behavior_tree_humble_main::SpinCancel>(
     "CancelSpin", builder);
 }

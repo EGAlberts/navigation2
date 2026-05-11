@@ -17,10 +17,10 @@
 #include <map>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/are_error_codes_present_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/are_error_codes_present_condition.hpp"
 #include "nav2_msgs/action/follow_path.hpp"
 
-class AreErrorCodesPresentFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class AreErrorCodesPresentFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   using Action = nav2_msgs::action::FollowPath;
@@ -40,7 +40,7 @@ public:
         </BehaviorTree>
       </root>)";
 
-    factory_->registerNodeType<nav2_behavior_tree::AreErrorCodesPresent>(
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::AreErrorCodesPresent>(
       "AreErrorCodesPresent");
     tree_ = std::make_shared<BT::Tree>(factory_->createTreeFromText(xml_txt, config_->blackboard));
   }

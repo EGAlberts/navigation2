@@ -16,11 +16,11 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
-#include "nav2_behavior_tree/plugins/decorator/speed_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/speed_controller.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 SpeedController::SpeedController(
@@ -50,7 +50,7 @@ SpeedController::SpeedController(
   d_rate_ = max_rate_ - min_rate_;
   d_speed_ = max_speed_ - min_speed_;
 
-  odom_smoother_ = config().blackboard->get<std::shared_ptr<nav2_util::OdomSmoother>>(
+  odom_smoother_ = config().blackboard->get<std::shared_ptr<hm_nav2_util::OdomSmoother>>(
     "odom_smoother");
 }
 
@@ -104,10 +104,10 @@ inline BT::NodeStatus SpeedController::tick()
   return status();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::SpeedController>("SpeedController");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::SpeedController>("SpeedController");
 }

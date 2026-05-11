@@ -13,9 +13,9 @@
 // limitations under the License.
 
 #include <string>
-#include "nav2_behavior_tree/plugins/control/recovery_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/control/recovery_node.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 RecoveryNode::RecoveryNode(
@@ -125,10 +125,10 @@ void RecoveryNode::halt()
   current_child_idx_ = 0;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::RecoveryNode>("RecoveryNode");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::RecoveryNode>("RecoveryNode");
 }

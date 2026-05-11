@@ -18,9 +18,9 @@
 
 #include "behaviortree_cpp/condition_node.h"
 
-#include "nav2_behavior_tree/plugins/condition/time_expired_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/time_expired_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 TimeExpiredCondition::TimeExpiredCondition(
@@ -63,10 +63,10 @@ BT::NodeStatus TimeExpiredCondition::tick()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::TimeExpiredCondition>("TimeExpired");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::TimeExpiredCondition>("TimeExpired");
 }

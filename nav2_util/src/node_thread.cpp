@@ -13,9 +13,9 @@
 // limitations under the License.
 
 #include <memory>
-#include "nav2_util/node_thread.hpp"
+#include "hm_nav2_util/node_thread.hpp"
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 NodeThread::NodeThread(
@@ -47,4 +47,4 @@ NodeThread::~NodeThread()
   thread_->join();
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

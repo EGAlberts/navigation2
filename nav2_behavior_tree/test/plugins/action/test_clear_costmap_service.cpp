@@ -21,7 +21,7 @@
 #include "behaviortree_cpp/bt_factory.h"
 
 #include "utils/test_service.hpp"
-#include "nav2_behavior_tree/plugins/action/clear_costmap_service.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/clear_costmap_service.hpp"
 
 class ClearEntireCostmapService : public TestService<nav2_msgs::srv::ClearEntireCostmap>
 {
@@ -59,7 +59,7 @@ public:
     config_->blackboard->set("initial_pose_received", false);
     config_->blackboard->set("number_recoveries", 0);
 
-    factory_->registerNodeType<nav2_behavior_tree::ClearEntireCostmapService>("ClearEntireCostmap");
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::ClearEntireCostmapService>("ClearEntireCostmap");
   }
 
   static void TearDownTestCase()
@@ -148,7 +148,7 @@ public:
     config_->blackboard->set("initial_pose_received", false);
     config_->blackboard->set("number_recoveries", 0);
 
-    factory_->registerNodeType<nav2_behavior_tree::ClearCostmapExceptRegionService>(
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::ClearCostmapExceptRegionService>(
       "ClearCostmapExceptRegion");
   }
 
@@ -243,7 +243,7 @@ public:
     config_->blackboard->set("initial_pose_received", false);
     config_->blackboard->set("number_recoveries", 0);
 
-    factory_->registerNodeType<nav2_behavior_tree::ClearCostmapAroundRobotService>(
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::ClearCostmapAroundRobotService>(
       "ClearCostmapAroundRobot");
   }
 

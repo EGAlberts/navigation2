@@ -18,28 +18,28 @@
 #include <cstdlib>
 #include <memory>
 #include "gtest/gtest.h"
-#include "nav2_util/lifecycle_node.hpp"
-#include "nav2_util/lifecycle_utils.hpp"
-#include "nav2_util/node_thread.hpp"
+#include "hm_nav2_util/lifecycle_node.hpp"
+#include "hm_nav2_util/lifecycle_utils.hpp"
+#include "hm_nav2_util/node_thread.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
-class DummyNode : public nav2_util::LifecycleNode
+class DummyNode : public hm_nav2_util::LifecycleNode
 {
 public:
   DummyNode()
-  : nav2_util::LifecycleNode("nav2_test_cli", "")
+  : hm_nav2_util::LifecycleNode("nav2_test_cli", "")
   {
     activated = false;
   }
 
-  nav2_util::CallbackReturn on_activate(const rclcpp_lifecycle::State & /*state*/)
+  hm_nav2_util::CallbackReturn on_activate(const rclcpp_lifecycle::State & /*state*/)
   {
     activated = true;
-    return nav2_util::CallbackReturn::SUCCESS;
+    return hm_nav2_util::CallbackReturn::SUCCESS;
   }
 
   bool activated;
@@ -51,7 +51,7 @@ public:
   Handle()
   {
     node = std::make_shared<DummyNode>();
-    thread = std::make_shared<nav2_util::NodeThread>(node->get_node_base_interface());
+    thread = std::make_shared<hm_nav2_util::NodeThread>(node->get_node_base_interface());
   }
   ~Handle()
   {
@@ -59,14 +59,14 @@ public:
     node.reset();
   }
 
-  std::shared_ptr<nav2_util::NodeThread> thread;
+  std::shared_ptr<hm_nav2_util::NodeThread> thread;
   std::shared_ptr<DummyNode> node;
 };
 
 TEST(LifecycleCLI, fails_no_node_name)
 {
   Handle handle;
-  auto rc = system("ros2 run nav2_util lifecycle_bringup");
+  auto rc = system("ros2 run hm_nav2_util lifecycle_bringup");
   (void)rc;
 #ifdef _WIN32
   Sleep(1000);
@@ -81,7 +81,7 @@ TEST(LifecycleCLI, fails_no_node_name)
 TEST(LifecycleCLI, succeeds_node_name)
 {
   Handle handle;
-  auto rc = system("ros2 run nav2_util lifecycle_bringup nav2_test_cli");
+  auto rc = system("ros2 run hm_nav2_util lifecycle_bringup nav2_test_cli");
 #ifdef _WIN32
   Sleep(3000);
 #else

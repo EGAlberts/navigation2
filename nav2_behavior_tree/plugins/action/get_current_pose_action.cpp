@@ -19,12 +19,12 @@
 
 #include "nav_msgs/msg/path.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 #include "behaviortree_cpp/decorator_node.h"
 
-#include "nav2_behavior_tree/plugins/action/get_current_pose_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/get_current_pose_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 GetCurrentPoseAction::GetCurrentPoseAction(
@@ -46,7 +46,7 @@ inline BT::NodeStatus GetCurrentPoseAction::tick()
   setStatus(BT::NodeStatus::RUNNING);
   geometry_msgs::msg::PoseStamped current_pose;
 
-  if (!nav2_util::getCurrentPose(
+  if (!hm_nav2_util::getCurrentPose(
       current_pose, *tf_, global_frame_, robot_base_frame_, transform_tolerance_))
   {
     RCLCPP_WARN(
@@ -59,10 +59,10 @@ inline BT::NodeStatus GetCurrentPoseAction::tick()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GetCurrentPoseAction>("GetCurrentPose");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GetCurrentPoseAction>("GetCurrentPose");
 }

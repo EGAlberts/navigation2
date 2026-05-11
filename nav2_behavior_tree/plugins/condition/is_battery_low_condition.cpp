@@ -15,9 +15,9 @@
 
 #include <string>
 
-#include "nav2_behavior_tree/plugins/condition/is_battery_low_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_battery_low_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 IsBatteryLowCondition::IsBatteryLowCondition(
@@ -89,10 +89,10 @@ void IsBatteryLowCondition::batteryCallback(sensor_msgs::msg::BatteryState::Shar
   }
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::IsBatteryLowCondition>("IsBatteryLow");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::IsBatteryLowCondition>("IsBatteryLow");
 }

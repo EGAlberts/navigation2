@@ -16,9 +16,9 @@
 #include <sstream>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/control/pipeline_sequence.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/control/pipeline_sequence.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 PipelineSequence::PipelineSequence(const std::string & name)
@@ -81,9 +81,9 @@ void PipelineSequence::halt()
   last_child_ticked_ = 0;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::PipelineSequence>("PipelineSequence");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::PipelineSequence>("PipelineSequence");
 }

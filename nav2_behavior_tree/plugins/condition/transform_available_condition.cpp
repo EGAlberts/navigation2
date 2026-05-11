@@ -20,11 +20,11 @@
 #include "tf2/time.hpp"
 #include "tf2_ros/buffer.h"
 
-#include "nav2_behavior_tree/plugins/condition/transform_available_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/transform_available_condition.hpp"
 
 using namespace std::chrono_literals; // NOLINT
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 TransformAvailableCondition::TransformAvailableCondition(
@@ -83,10 +83,10 @@ BT::NodeStatus TransformAvailableCondition::tick()
   return BT::NodeStatus::FAILURE;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::TransformAvailableCondition>("TransformAvailable");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::TransformAvailableCondition>("TransformAvailable");
 }

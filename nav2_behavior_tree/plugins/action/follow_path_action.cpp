@@ -15,9 +15,9 @@
 #include <memory>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/action/follow_path_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/follow_path_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 FollowPathAction::FollowPathAction(
@@ -33,36 +33,8 @@ void FollowPathAction::on_tick()
   getInput("path", goal_.path);
   getInput("controller_id", goal_.controller_id);
   getInput("goal_checker_id", goal_.goal_checker_id);
-  getInput("progress_checker_id", goal_.progress_checker_id);
 }
 
-BT::NodeStatus FollowPathAction::on_success()
-{
-  setOutput("error_code_id", ActionResult::NONE);
-  setOutput("error_msg", "");
-  return BT::NodeStatus::SUCCESS;
-}
-
-BT::NodeStatus FollowPathAction::on_aborted()
-{
-  setOutput("error_code_id", result_.result->error_code);
-  setOutput("error_msg", result_.result->error_msg);
-  return BT::NodeStatus::FAILURE;
-}
-
-BT::NodeStatus FollowPathAction::on_cancelled()
-{
-  // Set empty error code, action was cancelled
-  setOutput("error_code_id", ActionResult::NONE);
-  setOutput("error_msg", "");
-  return BT::NodeStatus::SUCCESS;
-}
-
-void FollowPathAction::on_timeout()
-{
-  setOutput("error_code_id", ActionResult::CONTROLLER_TIMED_OUT);
-  setOutput("error_msg", "Behavior Tree action client timed out waiting.");
-}
 
 void FollowPathAction::on_wait_for_result(
   std::shared_ptr<const Action::Feedback>/*feedback*/)
@@ -93,17 +65,9 @@ void FollowPathAction::on_wait_for_result(
     goal_.goal_checker_id = new_goal_checker_id;
     goal_updated_ = true;
   }
-
-  std::string new_progress_checker_id;
-  getInput("progress_checker_id", new_progress_checker_id);
-
-  if (goal_.progress_checker_id != new_progress_checker_id) {
-    goal_.progress_checker_id = new_progress_checker_id;
-    goal_updated_ = true;
-  }
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -111,10 +75,10 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::FollowPathAction>(
+      return std::make_unique<nav2_behavior_tree_humble_main::FollowPathAction>(
         name, "follow_path", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::FollowPathAction>(
+  factory.registerBuilder<nav2_behavior_tree_humble_main::FollowPathAction>(
     "FollowPath", builder);
 }

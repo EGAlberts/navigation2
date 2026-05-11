@@ -15,9 +15,9 @@
 #include <vector>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/condition/globally_updated_goal_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/globally_updated_goal_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 GloballyUpdatedGoalCondition::GloballyUpdatedGoalCondition(
@@ -52,10 +52,10 @@ BT::NodeStatus GloballyUpdatedGoalCondition::tick()
   return BT::NodeStatus::FAILURE;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GloballyUpdatedGoalCondition>("GlobalUpdatedGoal");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GloballyUpdatedGoalCondition>("GlobalUpdatedGoal");
 }

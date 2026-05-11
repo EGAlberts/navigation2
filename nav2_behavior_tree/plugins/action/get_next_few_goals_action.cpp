@@ -16,11 +16,11 @@
 #include <memory>
 #include <limits>
 
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
-#include "nav2_behavior_tree/plugins/action/get_next_few_goals_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/get_next_few_goals_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 GetNextFewGoals::GetNextFewGoals(
@@ -51,10 +51,10 @@ inline BT::NodeStatus GetNextFewGoals::tick()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GetNextFewGoals>("GetNextFewGoals");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GetNextFewGoals>("GetNextFewGoals");
 }

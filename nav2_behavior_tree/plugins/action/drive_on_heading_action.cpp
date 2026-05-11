@@ -15,9 +15,9 @@
 #include <string>
 #include <memory>
 
-#include "nav2_behavior_tree/plugins/action/drive_on_heading_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/drive_on_heading_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 DriveOnHeadingAction::DriveOnHeadingAction(
@@ -82,7 +82,7 @@ void DriveOnHeadingAction::on_timeout()
   setOutput("error_msg", "Behavior Tree action client timed out waiting.");
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -90,9 +90,9 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::DriveOnHeadingAction>(
+      return std::make_unique<nav2_behavior_tree_humble_main::DriveOnHeadingAction>(
         name, "drive_on_heading", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::DriveOnHeadingAction>("DriveOnHeading", builder);
+  factory.registerBuilder<nav2_behavior_tree_humble_main::DriveOnHeadingAction>("DriveOnHeading", builder);
 }

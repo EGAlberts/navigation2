@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_util/lifecycle_service_client.hpp"
+#include "hm_nav2_util/lifecycle_service_client.hpp"
 
 #include <string>
 #include <chrono>
@@ -21,13 +21,13 @@
 #include "lifecycle_msgs/srv/change_state.hpp"
 #include "lifecycle_msgs/srv/get_state.hpp"
 
-using nav2_util::generate_internal_node;
+using hm_nav2_util::generate_internal_node;
 using std::chrono::milliseconds;
 using std::make_shared;
 using std::string;
 using namespace std::chrono_literals;
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 LifecycleServiceClient::LifecycleServiceClient(
@@ -97,4 +97,4 @@ uint8_t LifecycleServiceClient::get_state(
   return result->current_state.id;
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

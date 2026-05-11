@@ -26,7 +26,7 @@
 #include "test_transform_handler.hpp"
 #include "test_dummy_tree_node.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 class BehaviorTreeTestFixture : public ::testing::Test
@@ -35,7 +35,7 @@ public:
   static void SetUpTestCase()
   {
     node_ = std::make_shared<rclcpp::Node>("test_behavior_tree_fixture");
-    transform_handler_ = std::make_shared<nav2_behavior_tree::TransformHandler>(node_);
+    transform_handler_ = std::make_shared<nav2_behavior_tree_humble_main::TransformHandler>(node_);
     factory_ = std::make_shared<BT::BehaviorTreeFactory>();
 
     config_ = new BT::NodeConfiguration();
@@ -73,21 +73,21 @@ public:
 
 protected:
   static rclcpp::Node::SharedPtr node_;
-  static std::shared_ptr<nav2_behavior_tree::TransformHandler> transform_handler_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::TransformHandler> transform_handler_;
   static BT::NodeConfiguration * config_;
   static std::shared_ptr<BT::BehaviorTreeFactory> factory_;
 };
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
-rclcpp::Node::SharedPtr nav2_behavior_tree::BehaviorTreeTestFixture::node_ = nullptr;
+rclcpp::Node::SharedPtr nav2_behavior_tree_humble_main::BehaviorTreeTestFixture::node_ = nullptr;
 
-std::shared_ptr<nav2_behavior_tree::TransformHandler>
-nav2_behavior_tree::BehaviorTreeTestFixture::transform_handler_ = nullptr;
+std::shared_ptr<nav2_behavior_tree_humble_main::TransformHandler>
+nav2_behavior_tree_humble_main::BehaviorTreeTestFixture::transform_handler_ = nullptr;
 
-BT::NodeConfiguration * nav2_behavior_tree::BehaviorTreeTestFixture::config_ = nullptr;
+BT::NodeConfiguration * nav2_behavior_tree_humble_main::BehaviorTreeTestFixture::config_ = nullptr;
 
 std::shared_ptr<BT::BehaviorTreeFactory>
-nav2_behavior_tree::BehaviorTreeTestFixture::factory_ = nullptr;
+nav2_behavior_tree_humble_main::BehaviorTreeTestFixture::factory_ = nullptr;
 
 #endif  // UTILS__TEST_BEHAVIOR_TREE_FIXTURE_HPP_

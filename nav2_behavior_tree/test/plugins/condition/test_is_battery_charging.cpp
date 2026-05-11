@@ -21,7 +21,7 @@
 #include "sensor_msgs/msg/battery_state.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/is_battery_charging_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_battery_charging_condition.hpp"
 
 class IsBatteryChargingConditionTestFixture : public ::testing::Test
 {
@@ -40,7 +40,7 @@ public:
       "node",
       node_);
 
-    factory_->registerNodeType<nav2_behavior_tree::IsBatteryChargingCondition>("IsBatteryCharging");
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::IsBatteryChargingCondition>("IsBatteryCharging");
 
     battery_pub_ = node_->create_publisher<sensor_msgs::msg::BatteryState>(
       "/battery_status",

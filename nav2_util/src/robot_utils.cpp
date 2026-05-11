@@ -19,10 +19,10 @@
 #include <memory>
 
 #include "tf2/convert.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 #include "rclcpp/logger.hpp"
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 bool getCurrentPose(
@@ -202,4 +202,4 @@ bool validateTwist(const geometry_msgs::msg::Twist & msg)
   return true;
 }
 
-}  // end namespace nav2_util
+}  // end namespace hm_nav2_util

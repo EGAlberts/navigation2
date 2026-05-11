@@ -14,9 +14,9 @@
 
 #include <string>
 #include <vector>
-#include "nav2_behavior_tree/plugins/condition/goal_updated_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/goal_updated_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 GoalUpdatedCondition::GoalUpdatedCondition(
@@ -47,10 +47,10 @@ BT::NodeStatus GoalUpdatedCondition::tick()
   return BT::NodeStatus::FAILURE;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GoalUpdatedCondition>("GoalUpdated");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GoalUpdatedCondition>("GoalUpdated");
 }

@@ -22,7 +22,7 @@
 #include "sensor_msgs/msg/battery_state.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/is_battery_low_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_battery_low_condition.hpp"
 
 class IsBatteryLowConditionTestFixture : public ::testing::Test
 {
@@ -41,7 +41,7 @@ public:
       "node",
       node_);
 
-    factory_->registerNodeType<nav2_behavior_tree::IsBatteryLowCondition>("IsBatteryLow");
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::IsBatteryLowCondition>("IsBatteryLow");
 
     battery_pub_ = node_->create_publisher<sensor_msgs::msg::BatteryState>(
       "/battery_status",

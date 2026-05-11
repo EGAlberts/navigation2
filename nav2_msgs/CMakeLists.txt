@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(nav2_msgs)
+project(hm_nav2_msgs)
 
 find_package(ament_cmake REQUIRED)
 find_package(nav2_common REQUIRED)
@@ -8,7 +8,6 @@ find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(geographic_msgs)
 find_package(action_msgs REQUIRED)
 
 nav2_package()
@@ -65,12 +64,11 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "action/Spin.action"
   "action/DummyBehavior.action"
   "action/FollowWaypoints.action"
-  "action/FollowGPSWaypoints.action"
   "action/DockRobot.action"
   "action/UndockRobot.action"
   "action/ComputeRoute.action"
   "action/ComputeAndTrackRoute.action"
-  DEPENDENCIES builtin_interfaces geometry_msgs std_msgs action_msgs nav_msgs geographic_msgs
+  DEPENDENCIES builtin_interfaces geometry_msgs std_msgs action_msgs nav_msgs
 )
 
 ament_export_dependencies(rosidl_default_runtime)

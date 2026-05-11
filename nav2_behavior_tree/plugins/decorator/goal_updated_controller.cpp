@@ -18,9 +18,9 @@
 #include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "behaviortree_cpp/decorator_node.h"
-#include "nav2_behavior_tree/plugins/decorator/goal_updated_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/goal_updated_controller.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 GoalUpdatedController::GoalUpdatedController(
@@ -66,10 +66,10 @@ BT::NodeStatus GoalUpdatedController::tick()
   return status();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GoalUpdatedController>("GoalUpdatedController");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GoalUpdatedController>("GoalUpdatedController");
 }

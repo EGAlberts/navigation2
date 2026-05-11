@@ -21,7 +21,7 @@
 #include "behaviortree_cpp/bt_factory.h"
 
 #include "utils/test_service.hpp"
-#include "nav2_behavior_tree/plugins/action/reinitialize_global_localization_service.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/reinitialize_global_localization_service.hpp"
 
 class ReinitializeGlobalLocalizationService : public TestService<std_srvs::srv::Empty>
 {
@@ -58,7 +58,7 @@ public:
       std::chrono::milliseconds(1000));
     config_->blackboard->set("initial_pose_received", false);
 
-    factory_->registerNodeType<nav2_behavior_tree::ReinitializeGlobalLocalizationService>(
+    factory_->registerNodeType<nav2_behavior_tree_humble_main::ReinitializeGlobalLocalizationService>(
       "ReinitializeGlobalLocalization");
   }
 

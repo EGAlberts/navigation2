@@ -19,12 +19,12 @@
 #include <set>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/decorator/goal_updated_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/goal_updated_controller.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-class GoalUpdatedControllerTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class GoalUpdatedControllerTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
@@ -36,9 +36,9 @@ public:
     poses1.goals.push_back(goal1);
     config_->blackboard->set("goal", goal1);
     config_->blackboard->set("goals", poses1);
-    bt_node_ = std::make_shared<nav2_behavior_tree::GoalUpdatedController>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::GoalUpdatedController>(
       "goal_updated_controller", *config_);
-    dummy_node_ = std::make_shared<nav2_behavior_tree::DummyNode>();
+    dummy_node_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
     bt_node_->setChild(dummy_node_.get());
   }
 
@@ -49,13 +49,13 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::GoalUpdatedController> bt_node_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> dummy_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::GoalUpdatedController> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> dummy_node_;
 };
 
-std::shared_ptr<nav2_behavior_tree::GoalUpdatedController>
+std::shared_ptr<nav2_behavior_tree_humble_main::GoalUpdatedController>
 GoalUpdatedControllerTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 GoalUpdatedControllerTestFixture::dummy_node_ = nullptr;
 
 TEST_F(GoalUpdatedControllerTestFixture, test_behavior)

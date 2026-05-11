@@ -22,8 +22,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/compute_route_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/compute_route_action.hpp"
 
 class ComputeRouteActionServer : public TestActionServer<nav2_msgs::action::ComputeRoute>
 {
@@ -84,11 +84,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::ComputeRouteAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::ComputeRouteAction>(
           name, "compute_route", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::ComputeRouteAction>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::ComputeRouteAction>(
       "ComputeRoute", builder);
   }
 

@@ -24,7 +24,7 @@
 
 #include "utils/test_behavior_tree_fixture.hpp"
 #include "utils/test_dummy_tree_node.hpp"
-#include "nav2_behavior_tree/plugins/decorator/path_longer_on_approach.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/path_longer_on_approach.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
@@ -49,11 +49,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::PathLongerOnApproach>(
+        return std::make_unique<nav2_behavior_tree_humble_main::PathLongerOnApproach>(
           name, config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::PathLongerOnApproach>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::PathLongerOnApproach>(
       "PathLongerOnApproach", builder);
   }
 

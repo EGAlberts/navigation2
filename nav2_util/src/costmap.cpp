@@ -14,15 +14,15 @@
 
 #include <vector>
 #include <algorithm>
-#include "nav2_util/costmap.hpp"
+#include "hm_nav2_util/costmap.hpp"
 #include "tf2/LinearMath/Quaternion.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
 using std::vector;
 
-namespace nav2_util
+namespace hm_nav2_util
 {
-using nav2_util::geometry_utils::orientationAroundZAxis;
+using hm_nav2_util::geometry_utils::orientationAroundZAxis;
 
 const Costmap::CostValue Costmap::no_information = 255;
 const Costmap::CostValue Costmap::lethal_obstacle = 254;
@@ -263,4 +263,4 @@ bool Costmap::is_free(const unsigned int index) const
   return false;
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

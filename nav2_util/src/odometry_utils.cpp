@@ -15,12 +15,12 @@
 
 #include <string>
 
-#include "nav2_util/odometry_utils.hpp"
+#include "hm_nav2_util/odometry_utils.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
-namespace nav2_util
+namespace hm_nav2_util
 {
 
 OdomSmoother::OdomSmoother(
@@ -44,7 +44,7 @@ OdomSmoother::OdomSmoother(
 }
 
 OdomSmoother::OdomSmoother(
-  const nav2_util::LifecycleNode::WeakPtr & parent,
+  const hm_nav2_util::LifecycleNode::WeakPtr & parent,
   double filter_duration,
   const std::string & odom_topic)
 : odom_history_duration_(rclcpp::Duration::from_seconds(filter_duration))
@@ -119,4 +119,4 @@ void OdomSmoother::updateState()
   vel_smooth_.twist.angular.z = odom_cumulate_.twist.twist.angular.z / odom_history_.size();
 }
 
-}  // namespace nav2_util
+}  // namespace hm_nav2_util

@@ -15,9 +15,9 @@
 #include <chrono>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/decorator/rate_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/rate_controller.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 RateController::RateController(
@@ -85,10 +85,10 @@ BT::NodeStatus RateController::tick()
   return status();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::RateController>("RateController");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::RateController>("RateController");
 }

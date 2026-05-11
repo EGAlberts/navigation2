@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "nav2_behavior_tree/behavior_tree_engine.hpp"
+#include "nav2_behavior_tree_humble_main/behavior_tree_engine.hpp"
 
 #include <memory>
 #include <string>
@@ -22,10 +22,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include "behaviortree_cpp/json_export.h"
 #include "behaviortree_cpp/utils/shared_library.h"
-#include "nav2_behavior_tree/json_utils.hpp"
-#include "nav2_behavior_tree/utils/loop_rate.hpp"
+#include "nav2_behavior_tree_humble_main/json_utils.hpp"
+#include "nav2_behavior_tree_humble_main/utils/loop_rate.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 BehaviorTreeEngine::BehaviorTreeEngine(
@@ -52,7 +52,7 @@ BehaviorTreeEngine::run(
   std::function<bool()> cancelRequested,
   std::chrono::milliseconds loopTimeout)
 {
-  nav2_behavior_tree::LoopRate loopRate(loopTimeout, tree);
+  nav2_behavior_tree_humble_main::LoopRate loopRate(loopTimeout, tree);
   BT::NodeStatus result = BT::NodeStatus::RUNNING;
 
   // Loop until something happens with ROS or the node completes
@@ -130,4 +130,4 @@ BehaviorTreeEngine::haltAllActions(BT::Tree & tree)
   tree.haltTree();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main

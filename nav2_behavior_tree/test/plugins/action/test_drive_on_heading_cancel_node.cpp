@@ -19,8 +19,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/drive_on_heading_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/drive_on_heading_cancel_node.hpp"
 #include "lifecycle_msgs/srv/change_state.hpp"
 
 class CancelDriveOnHeadingServer : public TestActionServer<nav2_msgs::action::DriveOnHeading>
@@ -74,11 +74,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::DriveOnHeadingCancel>(
+        return std::make_unique<nav2_behavior_tree_humble_main::DriveOnHeadingCancel>(
           name, "drive_on_heading_cancel", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::DriveOnHeadingCancel>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::DriveOnHeadingCancel>(
       "CancelDriveOnHeading",
       builder);
   }

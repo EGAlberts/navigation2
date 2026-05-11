@@ -19,8 +19,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/controller_cancel_node.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/controller_cancel_node.hpp"
 #include "lifecycle_msgs/srv/change_state.hpp"
 
 class CancelControllerServer : public TestActionServer<nav2_msgs::action::FollowPath>
@@ -73,11 +73,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::ControllerCancel>(
+        return std::make_unique<nav2_behavior_tree_humble_main::ControllerCancel>(
           name, "follow_path", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::ControllerCancel>("CancelControl", builder);
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::ControllerCancel>("CancelControl", builder);
   }
 
   static void TearDownTestCase()

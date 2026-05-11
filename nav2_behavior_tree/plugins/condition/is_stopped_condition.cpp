@@ -15,9 +15,9 @@
 #include <string>
 #include <chrono>
 
-#include "nav2_behavior_tree/plugins/condition/is_stopped_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_stopped_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 IsStoppedCondition::IsStoppedCondition(
@@ -29,7 +29,7 @@ IsStoppedCondition::IsStoppedCondition(
   stopped_stamp_(rclcpp::Time(0, 0, RCL_ROS_TIME))
 {
   node_ = config().blackboard->get<rclcpp::Node::SharedPtr>("node");
-  odom_smoother_ = config().blackboard->get<std::shared_ptr<nav2_util::OdomSmoother>>(
+  odom_smoother_ = config().blackboard->get<std::shared_ptr<hm_nav2_util::OdomSmoother>>(
     "odom_smoother");
 }
 
@@ -71,10 +71,10 @@ BT::NodeStatus IsStoppedCondition::tick()
   }
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::IsStoppedCondition>("IsStopped");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::IsStoppedCondition>("IsStopped");
 }

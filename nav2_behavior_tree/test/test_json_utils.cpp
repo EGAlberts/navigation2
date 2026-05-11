@@ -20,9 +20,9 @@
 #include "geometry_msgs/msg/quaternion.hpp"
 #include "nav_msgs/msg/goals.hpp"
 #include "nav_msgs/msg/path.hpp"
-#include "nav2_behavior_tree/bt_utils.hpp"
-#include "nav2_behavior_tree/json_utils.hpp"
-#include "nav2_msgs/msg/waypoint_status.hpp"
+#include "nav2_behavior_tree_humble_main/bt_utils.hpp"
+#include "nav2_behavior_tree_humble_main/json_utils.hpp"
+#include "hm_nav2_msgs/msg/waypoint_status.hpp"
 
 
 class JsonTest : public testing::Test
@@ -41,8 +41,8 @@ protected:
     exporter.addConverter<std::vector<geometry_msgs::msg::PoseStamped>>();
     exporter.addConverter<nav_msgs::msg::Goals>();
     exporter.addConverter<nav_msgs::msg::Path>();
-    exporter.addConverter<nav2_msgs::msg::WaypointStatus>();
-    exporter.addConverter<std::vector<nav2_msgs::msg::WaypointStatus>>();
+    exporter.addConverter<hm_nav2_msgs::msg::WaypointStatus>();
+    exporter.addConverter<std::vector<hm_nav2_msgs::msg::WaypointStatus>>();
   }
 };
 
@@ -838,7 +838,7 @@ TEST_F(JsonTest, test_waypoint_status)
 {
   BT::JsonExporter & exporter = BT::JsonExporter::get();
 
-  nav2_msgs::msg::WaypointStatus waypoint_status_test;
+  hm_nav2_msgs::msg::WaypointStatus waypoint_status_test;
   waypoint_status_test.waypoint_status = 1;
   waypoint_status_test.waypoint_index = 2;
   waypoint_status_test.waypoint_pose.header.stamp.sec = 1;
@@ -859,7 +859,7 @@ TEST_F(JsonTest, test_waypoint_status)
 
   std::cout << json.dump(2) << std::endl;
 
-  ASSERT_EQ(json["waypoint_status"]["__type"], "nav2_msgs::msg::WaypointStatus");
+  ASSERT_EQ(json["waypoint_status"]["__type"], "hm_nav2_msgs::msg::WaypointStatus");
   ASSERT_EQ(json["waypoint_status"]["waypoint_status"], 1);
   ASSERT_EQ(json["waypoint_status"]["waypoint_index"], 2);
   ASSERT_EQ(json["waypoint_status"]["waypoint_pose"]["__type"],
@@ -889,7 +889,7 @@ TEST_F(JsonTest, test_waypoint_status)
 
   // Check the two-ways transform, i.e. "from_json"
   auto waypoint_status_test2 =
-    exporter.fromJson(json["waypoint_status"])->first.cast<nav2_msgs::msg::WaypointStatus>();
+    exporter.fromJson(json["waypoint_status"])->first.cast<hm_nav2_msgs::msg::WaypointStatus>();
   ASSERT_EQ(waypoint_status_test.waypoint_status, waypoint_status_test2.waypoint_status);
   ASSERT_EQ(waypoint_status_test.waypoint_index, waypoint_status_test2.waypoint_index);
   ASSERT_EQ(waypoint_status_test.waypoint_pose.header.stamp.sec,
@@ -916,11 +916,11 @@ TEST_F(JsonTest, test_waypoint_status)
   ASSERT_EQ(waypoint_status_test.error_msg, waypoint_status_test2.error_msg);
 
   // Convert from string
-  nav2_msgs::msg::WaypointStatus waypoint_status_test3;
+  hm_nav2_msgs::msg::WaypointStatus waypoint_status_test3;
   auto const test_json =
     R"(json:
       {
-        "__type": "nav2_msgs::msg::WaypointStatus",
+        "__type": "hm_nav2_msgs::msg::WaypointStatus",
         "waypoint_status": 1,
         "waypoint_index": 2,
         "waypoint_pose": {
@@ -947,7 +947,7 @@ TEST_F(JsonTest, test_waypoint_status)
       }
     )";
   ASSERT_NO_THROW(waypoint_status_test3 =
-    BT::convertFromString<nav2_msgs::msg::WaypointStatus>(test_json));
+    BT::convertFromString<hm_nav2_msgs::msg::WaypointStatus>(test_json));
   ASSERT_EQ(waypoint_status_test.waypoint_status, waypoint_status_test3.waypoint_status);
   ASSERT_EQ(waypoint_status_test.waypoint_index, waypoint_status_test3.waypoint_index);
   ASSERT_EQ(waypoint_status_test.waypoint_pose, waypoint_status_test3.waypoint_pose);
@@ -959,7 +959,7 @@ TEST_F(JsonTest, test_waypoint_status_vector)
 {
   BT::JsonExporter & exporter = BT::JsonExporter::get();
 
-  std::vector<nav2_msgs::msg::WaypointStatus> waypoint_status_vector_test;
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> waypoint_status_vector_test;
   waypoint_status_vector_test.resize(2);
   waypoint_status_vector_test[0].waypoint_status = 1;
   waypoint_status_vector_test[0].waypoint_index = 2;
@@ -995,7 +995,7 @@ TEST_F(JsonTest, test_waypoint_status_vector)
   exporter.toJson(BT::Any(waypoint_status_vector_test), json["waypoint_status_vector"]);
   std::cout << json.dump(2) << std::endl;
 
-  ASSERT_EQ(json["waypoint_status_vector"][0]["__type"], "nav2_msgs::msg::WaypointStatus");
+  ASSERT_EQ(json["waypoint_status_vector"][0]["__type"], "hm_nav2_msgs::msg::WaypointStatus");
   ASSERT_EQ(json["waypoint_status_vector"][0]["waypoint_status"], 1);
   ASSERT_EQ(json["waypoint_status_vector"][0]["waypoint_index"], 2);
   ASSERT_EQ(json["waypoint_status_vector"][0]["waypoint_pose"]["__type"],
@@ -1022,7 +1022,7 @@ TEST_F(JsonTest, test_waypoint_status_vector)
   ASSERT_EQ(json["waypoint_status_vector"][0]["waypoint_pose"]["pose"]["orientation"]["w"], 9.0);
   ASSERT_EQ(json["waypoint_status_vector"][0]["error_code"], 10);
   ASSERT_EQ(json["waypoint_status_vector"][0]["error_msg"], "error");
-  ASSERT_EQ(json["waypoint_status_vector"][1]["__type"], "nav2_msgs::msg::WaypointStatus");
+  ASSERT_EQ(json["waypoint_status_vector"][1]["__type"], "hm_nav2_msgs::msg::WaypointStatus");
   ASSERT_EQ(json["waypoint_status_vector"][1]["waypoint_status"], 11);
   ASSERT_EQ(json["waypoint_status_vector"][1]["waypoint_index"], 12);
   ASSERT_EQ(json["waypoint_status_vector"][1]["waypoint_pose"]["__type"],
@@ -1052,5 +1052,5 @@ TEST_F(JsonTest, test_waypoint_status_vector)
 
   // Check the two-ways transform, i.e. "from_json"
   // auto waypoint_status_vector_test2 =
-  //   exporter.fromJson(json["waypoint_status_vector"])->first.cast<std::vector<nav2_msgs::msg::WaypointStatus>>();
+  //   exporter.fromJson(json["waypoint_status_vector"])->first.cast<std::vector<hm_nav2_msgs::msg::WaypointStatus>>();
 }

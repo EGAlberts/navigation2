@@ -17,12 +17,12 @@
 #include <memory>
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/condition/distance_traveled_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/distance_traveled_condition.hpp"
 
-class DistanceTraveledConditionTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class DistanceTraveledConditionTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
@@ -30,7 +30,7 @@ public:
     config_->input_ports["global_frame"] = "map";
     config_->input_ports["robot_base_frame"] = "base_link";
     config_->input_ports["distance"] = 1.0;
-    bt_node_ = std::make_shared<nav2_behavior_tree::DistanceTraveledCondition>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::DistanceTraveledCondition>(
       "distance_traveled", *config_);
   }
 
@@ -40,10 +40,10 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::DistanceTraveledCondition> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DistanceTraveledCondition> bt_node_;
 };
 
-std::shared_ptr<nav2_behavior_tree::DistanceTraveledCondition>
+std::shared_ptr<nav2_behavior_tree_humble_main::DistanceTraveledCondition>
 DistanceTraveledConditionTestFixture::bt_node_ = nullptr;
 
 TEST_F(DistanceTraveledConditionTestFixture, test_behavior)
@@ -66,7 +66,7 @@ TEST_F(DistanceTraveledConditionTestFixture, test_behavior)
     // we wait for the traveled distance to reach a value > i * 0.5
     // we can assume the current transform has been updated at this point
     while (traveled < i * 0.5) {
-      if (nav2_util::getCurrentPose(pose, *transform_handler_->getBuffer())) {
+      if (hm_nav2_util::getCurrentPose(pose, *transform_handler_->getBuffer())) {
         traveled = pose.pose.position.x;
       }
     }

@@ -19,13 +19,13 @@
 #include <set>
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/decorator/single_trigger_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/single_trigger_node.hpp"
 
 using namespace std::chrono;  // NOLINT
 using namespace std::chrono_literals;  // NOLINT
 
 // Shim BT node to access protected resetStatus method
-class ShimNode : public nav2_behavior_tree::SingleTrigger
+class ShimNode : public nav2_behavior_tree_humble_main::SingleTrigger
 {
 public:
   ShimNode(
@@ -37,13 +37,13 @@ public:
   void changeStatus() {resetStatus();}
 };
 
-class SingleTriggerTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class SingleTriggerTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
   {
     bt_node_ = std::make_shared<ShimNode>("single_trigger", *config_);
-    dummy_node_ = std::make_shared<nav2_behavior_tree::DummyNode>();
+    dummy_node_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
     bt_node_->setChild(dummy_node_.get());
   }
 
@@ -55,12 +55,12 @@ public:
 
 protected:
   static std::shared_ptr<ShimNode> bt_node_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> dummy_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> dummy_node_;
 };
 
 std::shared_ptr<ShimNode>
 SingleTriggerTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 SingleTriggerTestFixture::dummy_node_ = nullptr;
 
 TEST_F(SingleTriggerTestFixture, test_behavior)

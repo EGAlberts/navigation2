@@ -16,13 +16,13 @@
 #include <memory>
 #include <limits>
 
-#include "nav2_behavior_tree/plugins/action/remove_in_collision_goals_action.hpp"
-#include "nav2_behavior_tree/bt_utils.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/remove_in_collision_goals_action.hpp"
+#include "nav2_behavior_tree_humble_main/bt_utils.hpp"
 #include "tf2/utils.hpp"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 RemoveInCollisionGoals::RemoveInCollisionGoals(
@@ -65,7 +65,7 @@ BT::NodeStatus RemoveInCollisionGoals::on_completion(
   }
 
   // get the `waypoint_statuses` vector
-  std::vector<nav2_msgs::msg::WaypointStatus> waypoint_statuses;
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> waypoint_statuses;
   auto waypoint_statuses_get_res = getInput("input_waypoint_statuses", waypoint_statuses);
   if (!waypoint_statuses_get_res) {
     RCLCPP_ERROR(node_->get_logger(), "Missing [input_waypoint_statuses] port input!");
@@ -78,7 +78,7 @@ BT::NodeStatus RemoveInCollisionGoals::on_completion(
     {
       valid_goal_poses.goals.push_back(input_goals_.goals[i]);
     } else if (waypoint_statuses_get_res) {
-      using namespace nav2_util::geometry_utils;  // NOLINT
+      using namespace hm_nav2_util::geometry_utils;  // NOLINT
       auto cur_waypoint_index =
         find_next_matching_goal_in_waypoint_statuses(waypoint_statuses, input_goals_.goals[i]);
       if (cur_waypoint_index == -1) {
@@ -86,7 +86,7 @@ BT::NodeStatus RemoveInCollisionGoals::on_completion(
         return BT::NodeStatus::FAILURE;
       }
       waypoint_statuses[cur_waypoint_index].waypoint_status =
-        nav2_msgs::msg::WaypointStatus::SKIPPED;
+        hm_nav2_msgs::msg::WaypointStatus::SKIPPED;
     }
   }
   // Inform if all goals have been removed
@@ -102,10 +102,10 @@ BT::NodeStatus RemoveInCollisionGoals::on_completion(
   return BT::NodeStatus::SUCCESS;
 }
 
-}   // namespace nav2_behavior_tree
+}   // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::RemoveInCollisionGoals>("RemoveInCollisionGoals");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::RemoveInCollisionGoals>("RemoveInCollisionGoals");
 }

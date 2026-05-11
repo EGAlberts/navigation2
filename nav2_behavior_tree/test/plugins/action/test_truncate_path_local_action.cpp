@@ -19,30 +19,30 @@
 
 #include "nav_msgs/msg/path.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
 #include "behaviortree_cpp/bt_factory.h"
 
 #include "utils/test_behavior_tree_fixture.hpp"
-#include "nav2_behavior_tree/plugins/action/truncate_path_local_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/truncate_path_local_action.hpp"
 
 
-class TruncatePathLocalTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class TruncatePathLocalTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp() override
   {
-    bt_node_ = std::make_shared<nav2_behavior_tree::TruncatePathLocal>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::TruncatePathLocal>(
       "truncate_path_local", *config_);
 
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::TruncatePathLocal>(
+        return std::make_unique<nav2_behavior_tree_humble_main::TruncatePathLocal>(
           name, config);
       };
     try {
-      factory_->registerBuilder<nav2_behavior_tree::TruncatePathLocal>(
+      factory_->registerBuilder<nav2_behavior_tree_humble_main::TruncatePathLocal>(
         "TruncatePathLocal", builder);
     } catch (BT::BehaviorTreeException const &) {
       // ignoring multiple registrations of TruncatePathLocal
@@ -60,7 +60,7 @@ public:
     geometry_msgs::msg::PoseStamped pose;
     pose.pose.position.x = x;
     pose.pose.position.y = y;
-    pose.pose.orientation = nav2_util::geometry_utils::orientationAroundZAxis(orientation);
+    pose.pose.orientation = hm_nav2_util::geometry_utils::orientationAroundZAxis(orientation);
     return pose;
   }
 
@@ -94,11 +94,11 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::TruncatePathLocal> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::TruncatePathLocal> bt_node_;
   static std::shared_ptr<BT::Tree> tree_;
 };
 
-std::shared_ptr<nav2_behavior_tree::TruncatePathLocal> TruncatePathLocalTestFixture::bt_node_ =
+std::shared_ptr<nav2_behavior_tree_humble_main::TruncatePathLocal> TruncatePathLocalTestFixture::bt_node_ =
   nullptr;
 std::shared_ptr<BT::Tree> TruncatePathLocalTestFixture::tree_ = nullptr;
 

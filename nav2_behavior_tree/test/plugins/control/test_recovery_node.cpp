@@ -18,10 +18,10 @@
 
 #include "utils/test_behavior_tree_fixture.hpp"
 #include "utils/test_dummy_tree_node.hpp"
-#include "nav2_behavior_tree/plugins/control/recovery_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/control/recovery_node.hpp"
 
 // Changes status to SUCCESS after a specified number of failures
-class RecoveryDummy : public nav2_behavior_tree::DummyNode
+class RecoveryDummy : public nav2_behavior_tree_humble_main::DummyNode
 {
 public:
   BT::NodeStatus tick() override
@@ -53,13 +53,13 @@ private:
   int num_failure_{-1};
 };
 
-class RecoveryNodeTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class RecoveryNodeTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp() override
   {
     config_->input_ports["number_of_retries"] = 1;
-    bt_node_ = std::make_shared<nav2_behavior_tree::RecoveryNode>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::RecoveryNode>(
       "recovery_node", *config_);
     first_child_ = std::make_shared<RecoveryDummy>();
     second_child_ = std::make_shared<RecoveryDummy>();
@@ -75,18 +75,18 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::RecoveryNode> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::RecoveryNode> bt_node_;
   static std::shared_ptr<RecoveryDummy> first_child_;
   static std::shared_ptr<RecoveryDummy> second_child_;
 };
 
-std::shared_ptr<nav2_behavior_tree::RecoveryNode> RecoveryNodeTestFixture::bt_node_ = nullptr;
+std::shared_ptr<nav2_behavior_tree_humble_main::RecoveryNode> RecoveryNodeTestFixture::bt_node_ = nullptr;
 std::shared_ptr<RecoveryDummy> RecoveryNodeTestFixture::first_child_ = nullptr;
 std::shared_ptr<RecoveryDummy> RecoveryNodeTestFixture::second_child_ = nullptr;
 
 TEST_F(RecoveryNodeTestFixture, test_only_two_children)
 {
-  nav2_behavior_tree::DummyNode dummy;
+  nav2_behavior_tree_humble_main::DummyNode dummy;
   bt_node_->addChild(&dummy);
   EXPECT_THROW(bt_node_->executeTick(), BT::BehaviorTreeException);
 }

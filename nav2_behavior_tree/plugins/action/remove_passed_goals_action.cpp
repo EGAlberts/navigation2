@@ -17,11 +17,11 @@
 #include <limits>
 
 #include "nav_msgs/msg/path.hpp"
-#include "nav2_util/geometry_utils.hpp"
+#include "hm_nav2_util/geometry_utils.hpp"
 
-#include "nav2_behavior_tree/plugins/action/remove_passed_goals_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/remove_passed_goals_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 RemovePassedGoals::RemovePassedGoals(
@@ -57,10 +57,10 @@ inline BT::NodeStatus RemovePassedGoals::tick()
     return BT::NodeStatus::SUCCESS;
   }
 
-  using namespace nav2_util::geometry_utils;  // NOLINT
+  using namespace hm_nav2_util::geometry_utils;  // NOLINT
 
   geometry_msgs::msg::PoseStamped current_pose;
-  if (!nav2_util::getCurrentPose(
+  if (!hm_nav2_util::getCurrentPose(
       current_pose, *tf_, goal_poses.goals[0].header.frame_id, robot_base_frame_,
       transform_tolerance_))
   {
@@ -68,7 +68,7 @@ inline BT::NodeStatus RemovePassedGoals::tick()
   }
 
   // get the `waypoint_statuses` vector
-  std::vector<nav2_msgs::msg::WaypointStatus> waypoint_statuses;
+  std::vector<hm_nav2_msgs::msg::WaypointStatus> waypoint_statuses;
   auto waypoint_statuses_get_res = getInput("input_waypoint_statuses", waypoint_statuses);
   if (!waypoint_statuses_get_res) {
     RCLCPP_ERROR_ONCE(node_->get_logger(), "Missing [input_waypoint_statuses] port input!");
@@ -91,7 +91,7 @@ inline BT::NodeStatus RemovePassedGoals::tick()
         return BT::NodeStatus::FAILURE;
       }
       waypoint_statuses[cur_waypoint_index].waypoint_status =
-        nav2_msgs::msg::WaypointStatus::COMPLETED;
+        hm_nav2_msgs::msg::WaypointStatus::COMPLETED;
     }
 
     goal_poses.goals.erase(goal_poses.goals.begin());
@@ -104,10 +104,10 @@ inline BT::NodeStatus RemovePassedGoals::tick()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::RemovePassedGoals>("RemovePassedGoals");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::RemovePassedGoals>("RemovePassedGoals");
 }

@@ -21,7 +21,7 @@
 
 TEST(TestBaseFootprintPublisher, TestBaseFootprintPublisher)
 {
-  auto node = std::make_shared<nav2_util::BaseFootprintPublisher>();
+  auto node = std::make_shared<hm_nav2_util::BaseFootprintPublisher>();
   rclcpp::spin_some(node->get_node_base_interface());
 
   auto tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(node);

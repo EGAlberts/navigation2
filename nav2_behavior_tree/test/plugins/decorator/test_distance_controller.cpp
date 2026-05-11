@@ -19,13 +19,13 @@
 #include <set>
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 
 #include "utils/test_behavior_tree_fixture.hpp"
 #include "utils/test_dummy_tree_node.hpp"
-#include "nav2_behavior_tree/plugins/decorator/distance_controller.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/distance_controller.hpp"
 
-class DistanceControllerTestFixture : public nav2_behavior_tree::BehaviorTreeTestFixture
+class DistanceControllerTestFixture : public nav2_behavior_tree_humble_main::BehaviorTreeTestFixture
 {
 public:
   void SetUp()
@@ -33,9 +33,9 @@ public:
     config_->input_ports["distance"] = 1.0;
     config_->input_ports["global_frame"] = "map";
     config_->input_ports["robot_base_frame"] = "base_link";
-    bt_node_ = std::make_shared<nav2_behavior_tree::DistanceController>(
+    bt_node_ = std::make_shared<nav2_behavior_tree_humble_main::DistanceController>(
       "distance_controller", *config_);
-    dummy_node_ = std::make_shared<nav2_behavior_tree::DummyNode>();
+    dummy_node_ = std::make_shared<nav2_behavior_tree_humble_main::DummyNode>();
     bt_node_->setChild(dummy_node_.get());
   }
 
@@ -46,13 +46,13 @@ public:
   }
 
 protected:
-  static std::shared_ptr<nav2_behavior_tree::DistanceController> bt_node_;
-  static std::shared_ptr<nav2_behavior_tree::DummyNode> dummy_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DistanceController> bt_node_;
+  static std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode> dummy_node_;
 };
 
-std::shared_ptr<nav2_behavior_tree::DistanceController>
+std::shared_ptr<nav2_behavior_tree_humble_main::DistanceController>
 DistanceControllerTestFixture::bt_node_ = nullptr;
-std::shared_ptr<nav2_behavior_tree::DummyNode>
+std::shared_ptr<nav2_behavior_tree_humble_main::DummyNode>
 DistanceControllerTestFixture::dummy_node_ = nullptr;
 
 TEST_F(DistanceControllerTestFixture, test_behavior)
@@ -78,7 +78,7 @@ TEST_F(DistanceControllerTestFixture, test_behavior)
     // we wait for the traveled distance to reach a value > i * 0.5
     // we can assume the current transform has been updated at this point
     while (traveled < i * 0.5) {
-      if (nav2_util::getCurrentPose(pose, *transform_handler_->getBuffer())) {
+      if (hm_nav2_util::getCurrentPose(pose, *transform_handler_->getBuffer())) {
         traveled = std::sqrt(
           pose.pose.position.x * pose.pose.position.x +
           pose.pose.position.y * pose.pose.position.y);

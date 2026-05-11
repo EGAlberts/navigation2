@@ -23,8 +23,8 @@
 
 #include "behaviortree_cpp/bt_factory.h"
 
-#include "nav2_behavior_tree/utils/test_action_server.hpp"
-#include "nav2_behavior_tree/plugins/action/smooth_path_action.hpp"
+#include "nav2_behavior_tree_humble_main/utils/test_action_server.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/smooth_path_action.hpp"
 
 class SmoothPathActionServer : public TestActionServer<nav2_msgs::action::SmoothPath>
 {
@@ -75,11 +75,11 @@ public:
     BT::NodeBuilder builder =
       [](const std::string & name, const BT::NodeConfiguration & config)
       {
-        return std::make_unique<nav2_behavior_tree::SmoothPathAction>(
+        return std::make_unique<nav2_behavior_tree_humble_main::SmoothPathAction>(
           name, "smooth_path", config);
       };
 
-    factory_->registerBuilder<nav2_behavior_tree::SmoothPathAction>(
+    factory_->registerBuilder<nav2_behavior_tree_humble_main::SmoothPathAction>(
       "SmoothPath", builder);
   }
 

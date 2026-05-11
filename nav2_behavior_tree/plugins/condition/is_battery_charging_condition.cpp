@@ -14,9 +14,9 @@
 
 #include <string>
 
-#include "nav2_behavior_tree/plugins/condition/is_battery_charging_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/is_battery_charging_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 IsBatteryChargingCondition::IsBatteryChargingCondition(
@@ -80,10 +80,10 @@ void IsBatteryChargingCondition::batteryCallback(sensor_msgs::msg::BatteryState:
     (msg->power_supply_status == sensor_msgs::msg::BatteryState::POWER_SUPPLY_STATUS_CHARGING);
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::IsBatteryChargingCondition>("IsBatteryCharging");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::IsBatteryChargingCondition>("IsBatteryCharging");
 }

@@ -15,9 +15,9 @@
 #include <chrono>
 #include <string>
 
-#include "nav2_behavior_tree/plugins/decorator/single_trigger_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/decorator/single_trigger_node.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 SingleTrigger::SingleTrigger(
@@ -58,10 +58,10 @@ BT::NodeStatus SingleTrigger::tick()
   return BT::NodeStatus::FAILURE;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::SingleTrigger>("SingleTrigger");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::SingleTrigger>("SingleTrigger");
 }

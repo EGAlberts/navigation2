@@ -16,9 +16,9 @@
 #include <string>
 #include <vector>
 
-#include "nav2_behavior_tree/plugins/action/compute_path_through_poses_action.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/compute_path_through_poses_action.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 ComputePathThroughPosesAction::ComputePathThroughPosesAction(
@@ -41,9 +41,6 @@ void ComputePathThroughPosesAction::on_tick()
 BT::NodeStatus ComputePathThroughPosesAction::on_success()
 {
   setOutput("path", result_.result->path);
-  // Set empty error code, action was successful
-  setOutput("error_code_id", ActionResult::NONE);
-  setOutput("error_msg", "");
   return BT::NodeStatus::SUCCESS;
 }
 
@@ -51,8 +48,6 @@ BT::NodeStatus ComputePathThroughPosesAction::on_aborted()
 {
   nav_msgs::msg::Path empty_path;
   setOutput("path", empty_path);
-  setOutput("error_code_id", result_.result->error_code);
-  setOutput("error_msg", result_.result->error_msg);
   return BT::NodeStatus::FAILURE;
 }
 
@@ -60,28 +55,18 @@ BT::NodeStatus ComputePathThroughPosesAction::on_cancelled()
 {
   nav_msgs::msg::Path empty_path;
   setOutput("path", empty_path);
-  // Set empty error code, action was cancelled
-  setOutput("error_code_id", ActionResult::NONE);
-  setOutput("error_msg", "");
   return BT::NodeStatus::SUCCESS;
 }
 
-void ComputePathThroughPosesAction::on_timeout()
-{
-  setOutput("error_code_id", ActionResult::TIMEOUT);
-  setOutput("error_msg", "Behavior Tree action client timed out waiting.");
-}
 
 void ComputePathThroughPosesAction::halt()
 {
   nav_msgs::msg::Path empty_path;
   setOutput("path", empty_path);
-  // DO NOT reset "error_code_id" output port, we want to read it later
-  // DO NOT reset "error_msg" output port, we want to read it later
   BtActionNode::halt();
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
@@ -89,10 +74,10 @@ BT_REGISTER_NODES(factory)
   BT::NodeBuilder builder =
     [](const std::string & name, const BT::NodeConfiguration & config)
     {
-      return std::make_unique<nav2_behavior_tree::ComputePathThroughPosesAction>(
+      return std::make_unique<nav2_behavior_tree_humble_main::ComputePathThroughPosesAction>(
         name, "compute_path_through_poses", config);
     };
 
-  factory.registerBuilder<nav2_behavior_tree::ComputePathThroughPosesAction>(
+  factory.registerBuilder<nav2_behavior_tree_humble_main::ComputePathThroughPosesAction>(
     "ComputePathThroughPoses", builder);
 }

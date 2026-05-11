@@ -18,11 +18,11 @@
 
 #include "std_msgs/msg/string.hpp"
 
-#include "nav2_behavior_tree/plugins/action/controller_selector_node.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/action/controller_selector_node.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 using std::placeholders::_1;
@@ -103,10 +103,10 @@ ControllerSelector::callbackControllerSelect(const std_msgs::msg::String::Shared
   last_selected_controller_ = msg->data;
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::ControllerSelector>("ControllerSelector");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::ControllerSelector>("ControllerSelector");
 }

@@ -15,13 +15,13 @@
 #include <string>
 #include <memory>
 
-#include "nav2_util/robot_utils.hpp"
+#include "hm_nav2_util/robot_utils.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_util/node_utils.hpp"
+#include "hm_nav2_util/node_utils.hpp"
 
-#include "nav2_behavior_tree/plugins/condition/goal_reached_condition.hpp"
+#include "nav2_behavior_tree_humble_main/plugins/condition/goal_reached_condition.hpp"
 
-namespace nav2_behavior_tree
+namespace nav2_behavior_tree_humble_main
 {
 
 GoalReachedCondition::GoalReachedCondition(
@@ -44,7 +44,7 @@ void GoalReachedCondition::initialize()
 {
   node_ = config().blackboard->get<rclcpp::Node::SharedPtr>("node");
 
-  nav2_util::declare_parameter_if_not_declared(
+  hm_nav2_util::declare_parameter_if_not_declared(
     node_, "goal_reached_tol",
     rclcpp::ParameterValue(0.25));
   node_->get_parameter_or<double>("goal_reached_tol", goal_reached_tol_, 0.25);
@@ -71,7 +71,7 @@ bool GoalReachedCondition::isGoalReached()
   getInput("goal", goal);
 
   geometry_msgs::msg::PoseStamped current_pose;
-  if (!nav2_util::getCurrentPose(
+  if (!hm_nav2_util::getCurrentPose(
       current_pose, *tf_, goal.header.frame_id, robot_base_frame_, transform_tolerance_))
   {
     RCLCPP_DEBUG(node_->get_logger(), "Current robot pose is not available.");
@@ -84,10 +84,10 @@ bool GoalReachedCondition::isGoalReached()
   return (dx * dx + dy * dy) <= (goal_reached_tol_ * goal_reached_tol_);
 }
 
-}  // namespace nav2_behavior_tree
+}  // namespace nav2_behavior_tree_humble_main
 
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {
-  factory.registerNodeType<nav2_behavior_tree::GoalReachedCondition>("GoalReached");
+  factory.registerNodeType<nav2_behavior_tree_humble_main::GoalReachedCondition>("GoalReached");
 }
